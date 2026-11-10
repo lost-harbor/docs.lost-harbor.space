@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["SERVER_NAME","TICK_MS","VERSION"],"fn":["newest_mtime","router","serve","start"],"mod":["lab"],"struct":["Config","Host"],"type":["Shared"]};

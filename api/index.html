@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Public API documentation</title>
+
+    <link rel="stylesheet" href="../style.css">
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <header class="lh-docs-header">
+  <a class="lh-docs-brand" href="/" aria-label="Lost Harbor documentation home">
+    <img src="/assets/logo-wordmark.svg" alt="Lost Harbor">
+  </a>
+  <span class="lh-docs-label">Documentation</span>
+  <nav aria-label="Documentation">
+    <a href="/player/" aria-label="Player guide"><span class="lh-nav-full">Player guide</span><span class="lh-nav-short" aria-hidden="true">Player</span></a>
+    <a href="/developer/" aria-label="Developer guide"><span class="lh-nav-full">Developer guide</span><span class="lh-nav-short" aria-hidden="true">Developer</span></a>
+    <a href="/api/" aria-current="page" aria-label="API docs"><span class="lh-nav-full">API docs</span><span class="lh-nav-short" aria-hidden="true">API</span></a>
+  </nav>
+</header>
+<main class="doc-content">
+
+
+    <h1 class="title">Public API documentation</h1>
+    <p>These pages describe the public Rust library APIs.
+They exclude private items and generated source-code pages.
+Use the search box on a crate page to find types, functions and methods across the generated crates.</p>
+<h2 id="engine-and-contracts"><a class="doc-anchor" href="#engine-and-contracts">§</a>Engine and contracts</h2>
+<ul>
+<li><a href="lh_engine/index.html">lh_engine</a>: ECS simulation, plugins, commands and host API.</li>
+<li><a href="lh_protocol/index.html">lh_protocol</a>: wire messages, requests and view models.</li>
+<li><a href="lh_content/index.html">lh_content</a>: world models, content loading and validation.</li>
+<li><a href="lh_store/index.html">lh_store</a>: records and persistence strategies.</li>
+</ul>
+<h2 id="hosts-and-interface"><a class="doc-anchor" href="#hosts-and-interface">§</a>Hosts and interface</h2>
+<ul>
+<li><a href="lh_server/index.html">lh_server</a>: native HTTP, WebSocket and storage host.</li>
+<li><a href="lh_worker/index.html">lh_worker</a>: browser worker and IndexedDB host.</li>
+<li><a href="lh_client/index.html">lh_client</a>: Leptos components, state and browser transports.</li>
+<li><a href="lh_lab/index.html">lh_lab</a>: standalone generator tools.</li>
+</ul>
+<h2 id="shared-tools"><a class="doc-anchor" href="#shared-tools">§</a>Shared tools</h2>
+<ul>
+<li><a href="lh_markup/index.html">lh_markup</a>: game-text markup.</li>
+<li><a href="lh_map/index.html">lh_map</a>: room layout.</li>
+<li><a href="lh_space/index.html">lh_space</a>: orbit and flight math.</li>
+<li><a href="lh_portrait/index.html">lh_portrait</a>: seeded portrait drawing.</li>
+<li><a href="lh_names/index.html">lh_names</a>: Markov names, phrases and corpus metadata.</li>
+</ul>
+<h2 id="build-context"><a class="doc-anchor" href="#build-context">§</a>Build context</h2>
+<p>The published tree uses the native workspace’s library targets and default features.
+The native server enables the SQLite storage feature.
+Browser APIs are also checked for <code>wasm32-unknown-unknown</code>.
+The developer guide explains the two hosts and local documentation checks.</p>
+
+    </main>
+
+
+</body>
+</html>

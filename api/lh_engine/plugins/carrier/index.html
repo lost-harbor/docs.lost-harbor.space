@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Carriers: hangar bays that hold small craft. Carriers: large ships that hold small craft in a hangar bay."><title>lh_engine::plugins::carrier - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-0c87338a.css"><script id="default-settings" 
+data-use_system_theme="false"
+data-theme="dark"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="lh_engine" data-themes="" data-resource-suffix="" data-rustdoc-version="1.99.1 (58cf8f9c3 2026-10-13)" data-channel="1.99.1" data-search-js="search-cf4fc35e.js" data-stringdex-js="stringdex-b5109af9.js" data-settings-js="settings-170eb4bf.js" ><script src="../../../static.files/storage-41dd4d93.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-417ebf0a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-9f56287d.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"></head><body class="rustdoc mod"><a class="skip-main-content" href="#main-content">Skip to main content</a><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><header class="lh-docs-header">
+  <a class="lh-docs-brand" href="/" aria-label="Lost Harbor documentation home">
+    <img src="/assets/logo-wordmark.svg" alt="Lost Harbor">
+  </a>
+  <span class="lh-docs-label">Documentation</span>
+  <nav aria-label="Documentation">
+    <a href="/player/" aria-label="Player guide"><span class="lh-nav-full">Player guide</span><span class="lh-nav-short" aria-hidden="true">Player</span></a>
+    <a href="/developer/" aria-label="Developer guide"><span class="lh-nav-full">Developer guide</span><span class="lh-nav-short" aria-hidden="true">Developer</span></a>
+    <a href="/api/" aria-current="page" aria-label="API docs"><span class="lh-nav-full">API docs</span><span class="lh-nav-short" aria-hidden="true">API</span></a>
+  </nav>
+</header>
+
+<rustdoc-topbar><h2><a href="#">Module carrier</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../lh_engine/index.html">lh_<wbr>engine</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module carrier</a></h2><h3><a href="#structs">Module Items</a></h3><ul class="block"><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#constants" title="Constants">Constants</a></li><li><a href="#functions" title="Functions">Functions</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="../index.html">In lh_<wbr>engine::<wbr>plugins</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content" tabindex="-1"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">lh_engine</a>::<wbr><a href="../index.html">plugins</a></div><h1>Module <span>carrier</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Carriers: hangar bays that hold small craft.
+Carriers: large ships that hold small craft in a hangar bay.</p>
+<p>A carrier is a ship with craft slots (<code>hangar</code> in its record) and a room
+with the <code>hangar</code> flag. A craft in the bay is berthed there. The berth
+machinery of the space plugin then does the rest: a berthed ship counts
+as docked, it leaves the contact list, and the piloting plugin opens its
+airlock onto the bay, so crews walk between the two ships.</p>
+<p>Commands:</p>
+<ul>
+<li><code>dock &lt;ship&gt;</code> at a craft helm: lands in the bay of a carrier alongside.</li>
+<li><code>recover &lt;ship&gt;</code> at a carrier helm: draws a craft alongside into the bay.</li>
+<li><code>launch &lt;ship&gt;</code> at a carrier helm: sends a berthed craft out.</li>
+<li><code>launch</code> at a craft helm works as before. The craft leaves the bay and
+appears where the carrier is.</li>
+</ul>
+<p>The rules for a transfer, in <a href="fn.check.html" title="fn lh_engine::plugins::carrier::check"><code>check</code></a>:</p>
+<ul>
+<li>only small and medium hulls fit a bay,</li>
+<li>the two ships have the same owner,</li>
+<li>both hold still in one system, at one place or close together,</li>
+<li>the bay has a free slot.</li>
+</ul>
+<p>Design notes:</p>
+<ul>
+<li>This plugin adds commands of the same names as the flight plugin at a
+higher priority. Each handler passes when its words do not name a ship,
+so the flight commands run unchanged. That is the Chain of
+Responsibility pattern, and it keeps the flight plugin closed to edits.</li>
+<li>An observer of <code>Launched</code> moves a craft that leaves a bay to the point
+where its carrier is. That is the Observer pattern.</li>
+</ul>
+</div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.CarrierPlugin.html" title="struct lh_engine::plugins::carrier::CarrierPlugin">Carrier<wbr>Plugin</a></dt><dd>Hangar bays, recovery, and craft launches.</dd></dl><h2 id="constants" class="section-header">Constants<a href="#constants" class="anchor">§</a></h2><dl class="item-table"><dt><a class="constant" href="constant.NEAR.html" title="constant lh_engine::plugins::carrier::NEAR">NEAR</a></dt><dd>Two ships adrift within this many chart units count as alongside.</dd></dl><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><dl class="item-table"><dt><a class="fn" href="fn.alongside.html" title="fn lh_engine::plugins::carrier::alongside">alongside</a></dt><dd>True when two ships hold still in one system and close together: at one
+place, or adrift within <a href="constant.NEAR.html" title="constant lh_engine::plugins::carrier::NEAR"><code>NEAR</code></a> chart units. A ship in a dock or under
+way is never alongside.</dd><dt><a class="fn" href="fn.berth_now.html" title="fn lh_engine::plugins::carrier::berth_now">berth_<wbr>now</a></dt><dd>Berths <code>craft</code> in <code>bay</code>, the hangar of <code>carrier</code>, and tells both crews.</dd><dt><a class="fn" href="fn.berthed.html" title="fn lh_engine::plugins::carrier::berthed">berthed</a></dt><dd>The ids of the craft berthed in a carrier’s bay, in id order.</dd><dt><a class="fn" href="fn.carrier_of_bay.html" title="fn lh_engine::plugins::carrier::carrier_of_bay">carrier_<wbr>of_<wbr>bay</a></dt><dd>The carrier whose hangar bay <code>room</code> is, or <code>None</code> for any other room.</dd><dt><a class="fn" href="fn.check.html" title="fn lh_engine::plugins::carrier::check">check</a></dt><dd>Checks that <code>craft</code> can berth in the bay of <code>carrier</code> now. Returns the
+bay room, or a message that says why not.</dd><dt><a class="fn" href="fn.hangar_room.html" title="fn lh_engine::plugins::carrier::hangar_room">hangar_<wbr>room</a></dt><dd>The hangar bay room of a ship, with the owner suffix of a copy. <code>None</code>
+when the ship has no craft slots or no room with the <code>hangar</code> flag.</dd></dl></section></div></main></body></html>

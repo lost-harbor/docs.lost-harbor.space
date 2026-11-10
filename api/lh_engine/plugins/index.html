@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="The standard gameplay plugins. Standard gameplay plugins. Each one is self-contained: it registers its commands, views, observers and systems and depends mainly on the core (`world`, `events`, `ctx`, `queue`). A few import a sibling, such as `shops` using `items`, so the rule is core-first, not total isolation."><title>lh_engine::plugins - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-0c87338a.css"><script id="default-settings" 
+data-use_system_theme="false"
+data-theme="dark"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="lh_engine" data-themes="" data-resource-suffix="" data-rustdoc-version="1.99.1 (58cf8f9c3 2026-10-13)" data-channel="1.99.1" data-search-js="search-cf4fc35e.js" data-stringdex-js="stringdex-b5109af9.js" data-settings-js="settings-170eb4bf.js" ><script src="../../static.files/storage-41dd4d93.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../static.files/main-417ebf0a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-9f56287d.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc mod"><a class="skip-main-content" href="#main-content">Skip to main content</a><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><header class="lh-docs-header">
+  <a class="lh-docs-brand" href="/" aria-label="Lost Harbor documentation home">
+    <img src="/assets/logo-wordmark.svg" alt="Lost Harbor">
+  </a>
+  <span class="lh-docs-label">Documentation</span>
+  <nav aria-label="Documentation">
+    <a href="/player/" aria-label="Player guide"><span class="lh-nav-full">Player guide</span><span class="lh-nav-short" aria-hidden="true">Player</span></a>
+    <a href="/developer/" aria-label="Developer guide"><span class="lh-nav-full">Developer guide</span><span class="lh-nav-short" aria-hidden="true">Developer</span></a>
+    <a href="/api/" aria-current="page" aria-label="API docs"><span class="lh-nav-full">API docs</span><span class="lh-nav-short" aria-hidden="true">API</span></a>
+  </nav>
+</header>
+
+<rustdoc-topbar><h2><a href="#">Module plugins</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../lh_engine/index.html">lh_<wbr>engine</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module plugins</a></h2><h3><a href="#modules">Module Items</a></h3><ul class="block"><li><a href="#modules" title="Modules">Modules</a></li><li><a href="#functions" title="Functions">Functions</a></li></ul></section><div id="rustdoc-modnav"><h2 class="in-crate"><a href="../index.html">In crate lh_<wbr>engine</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content" tabindex="-1"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../index.html">lh_engine</a></div><h1>Module <span>plugins</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>The standard gameplay plugins.
+Standard gameplay plugins. Each one is self-contained: it registers its
+commands, views, observers and systems and depends mainly on the core
+(<code>world</code>, <code>events</code>, <code>ctx</code>, <code>queue</code>). A few import a sibling, such as
+<code>shops</code> using <code>items</code>, so the rule is core-first, not total isolation.</p>
+<p>Each file in this folder, other than this one, is one plugin. Its module
+doc lists what it registers. To write a new one, start from <code>CoinPlugin</code>
+in <code>tests/plugins.rs</code>.</p>
+</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><dl class="item-table"><dt><a class="mod" href="account/index.html" title="mod lh_engine::plugins::account">account</a></dt><dd>Users, characters and entering the world: Hello, Login, character
+creation and Play. Also owns the <code>user</code> and <code>character</code> record kinds and
+the core section of a character’s saved document.</dd><dt><a class="mod" href="behaviors/index.html" title="mod lh_engine::plugins::behaviors">behaviors</a></dt><dd>NPC behaviors: data-driven triggers, conditions, and actions.
+NPC behaviors: data-driven reactions, a modern take on CircleMUD’s special
+procedures and DG script triggers.</dd><dt><a class="mod" href="building/index.html" title="mod lh_engine::plugins::building">building</a></dt><dd>In-game building: the generic content API, the content editor API, and bundles.
+In-game building: the generic content API behind the graphical builder.</dd><dt><a class="mod" href="carrier/index.html" title="mod lh_engine::plugins::carrier">carrier</a></dt><dd>Carriers: hangar bays that hold small craft.
+Carriers: large ships that hold small craft in a hangar bay.</dd><dt><a class="mod" href="character/index.html" title="mod lh_engine::plugins::character">character</a></dt><dd>The character: score, skills, features, resting, experience and levelling.
+The character: score, skills, features (<code>use</code>), resting and sleeping,
+experience and levelling, and the Vitals and CharacterSheet views.</dd><dt><a class="mod" href="clock/index.html" title="mod lh_engine::plugins::clock">clock</a></dt><dd>Station time: a day counter and a minute of the day, advanced from the host clock.
+The <code>clock</code> plugin. It keeps station time: a day counter and a minute of
+the day, advanced from the host clock.</dd><dt><a class="mod" href="combat/index.html" title="mod lh_engine::plugins::combat">combat</a></dt><dd>Combat: real-time rounds, abilities, conditions, death, hazards and loot.
+The <code>combat</code> plugin: CircleMUD-style real-time fights with 5e resolution.</dd><dt><a class="mod" href="comms/index.html" title="mod lh_engine::plugins::comms">comms</a></dt><dd>Talking: say, emote, tells, channels, OOC and <code>who</code>.
+Talking: say, emote, socials, tells and replies, station channels, OOC and <code>who</code>.
+Player-authored text is always passed through <code>lh_markup::sanitize_player</code>
+(colours allowed, links stripped).</dd><dt><a class="mod" href="core/index.html" title="mod lh_engine::plugins::core">core</a></dt><dd>Core views every client needs: the UI mode and the action queue.
+Core views every client needs: the UI mode and the action queue.</dd><dt><a class="mod" href="crew/index.html" title="mod lh_engine::plugins::crew">crew</a></dt><dd>Hirelings: hire, list and dismiss crew who take posts aboard a ship.
+The <code>crew</code> plugin. A player hires hirelings from an NPC. Each hireling
+then walks the world as a real entity: it keeps a post aboard a ship,
+follows its employer, or guards someone. It fights by its stance, and a
+crew member who dies is gone for good.</dd><dt><a class="mod" href="factions/index.html" title="mod lh_engine::plugins::factions">factions</a></dt><dd>Faction standings, scanned ships and hostile contacts.
+The <code>factions</code> plugin. It tracks each character’s standing with each
+faction, and which ship contacts the character has scanned.</dd><dt><a class="mod" href="guards/index.html" title="mod lh_engine::plugins::guards">guards</a></dt><dd>Exit guards: content-driven checks that hold a character at an exit.
+The <code>guards</code> plugin. It holds a character at a guarded exit until the
+guard’s conditions hold.</dd><dt><a class="mod" href="help/index.html" title="mod lh_engine::plugins::help">help</a></dt><dd>The <code>help</code> command, which lists commands from the registry.
+The <code>help</code> plugin. It lists the visible commands from the command registry,
+grouped by each command’s group name, or explains one command or group.</dd><dt><a class="mod" href="instances/index.html" title="mod lh_engine::plugins::instances">instances</a></dt><dd>Private per-character copies of instance groups and owned ship rooms.
+The <code>instances</code> plugin. It gives each character a private copy of an
+instance group, and it runs the opening machinery that lives in a copy.</dd><dt><a class="mod" href="items/index.html" title="mod lh_engine::plugins::items">items</a></dt><dd>Things: room items, picking up, dropping, giving, wearing and searching.
+Things: room items and fixtures, picking up, dropping, giving, wearing,
+inventory and equipment, prising fixtures open and searching for hidden
+things. Also owns the <code>items</code> section of the character document.</dd><dt><a class="mod" href="jobs/index.html" title="mod lh_engine::plugins::jobs">jobs</a></dt><dd>Jobs from the tally board: accept, deliver and abandon.
+Jobs from the tally board (on your slate): <code>jobs</code>, <code>accept</code>, <code>deliver</code>,
+<code>abandon</code>. Delivery jobs complete when you hand over the goods in the
+right place. Visit jobs when you first reach the place.</dd><dt><a class="mod" href="look/index.html" title="mod lh_engine::plugins::look">look</a></dt><dd>Looking: room descriptions, the room view, extras, exits and people.
+Looking: room descriptions, the room view, extras, exits and people.
+Other plugins contribute room contents (presence), click verbs and
+<code>look &lt;thing&gt;</code> handlers through registries, so this plugin never needs
+to know about items, NPCs or ships.</dd><dt><a class="mod" href="movement/index.html" title="mod lh_engine::plugins::movement">movement</a></dt><dd>Moving on foot: direction commands, named exits, doors, <code>walk</code> and the local map.
+Moving on foot: direction commands, named exits, doors, <code>walk</code> to a known
+room, travel time for long exits, arrival events, and the local map.</dd><dt><a class="mod" href="names/index.html" title="mod lh_engine::plugins::names">names</a></dt><dd>Name styles and the <code>names</code> command, from Markov chains in <code>lh_names</code>.
+The <code>names</code> plugin: chains, phrases and new names, for builders.</dd><dt><a class="mod" href="npcs/index.html" title="mod lh_engine::plugins::npcs">npcs</a></dt><dd>Non-player characters: placement in rooms, <code>talk</code> and <code>ask</code>.
+The <code>npcs</code> plugin. It places non-player characters (NPCs) in their rooms,
+shows them in room views, and runs the <code>talk</code> and <code>ask</code> commands.</dd><dt><a class="mod" href="piloting/index.html" title="mod lh_engine::plugins::piloting">piloting</a></dt><dd>Ships as rooms: boarding through airlocks, taking and leaving the helm.
+Ships as places people walk in, and the helm.</dd><dt><a class="mod" href="portraits/index.html" title="mod lh_engine::plugins::portraits">portraits</a></dt><dd>Faces: the <code>portrait</code> command and the one free change after the Works.
+The <code>portraits</code> plugin: the typed commands for a character’s face.</dd><dt><a class="mod" href="shipyard/index.html" title="mod lh_engine::plugins::shipyard">shipyard</a></dt><dd>Shipyards: buying and selling whole ships, and the fleet list.
+Shipyards: buying and selling whole ships, and the fleet list.</dd><dt><a class="mod" href="shops/index.html" title="mod lh_engine::plugins::shops">shops</a></dt><dd>Shops: buying, selling and valuing with a shopkeeper NPC.
+Shops: buying and selling with a shopkeeper NPC in the room.</dd><dt><a class="mod" href="sims/index.html" title="mod lh_engine::plugins::sims">sims</a></dt><dd>Simulated players: they wander, chat, say things and answer tells.
+Simulated players: they wander, chat on channels, say things to people
+nearby, answer tells, and greet newcomers with one unsolicited tell.
+Sims act through the same command pipeline as players (<code>queue::execute</code>),
+so they obey every rule a player does.</dd><dt><a class="mod" href="space/index.html" title="mod lh_engine::plugins::space">space</a></dt><dd>Space: star systems, flight, fuel, gates, regions, traffic and ship records.
+Space: ships flying between places on a system chart.</dd><dt><a class="mod" href="templates/index.html" title="mod lh_engine::plugins::templates">templates</a></dt><dd>Character templates: new characters, and the showcase characters on offer.
+The <code>templates</code> plugin. It builds characters from <code>template</code> content
+records.</dd><dt><a class="mod" href="typed/index.html" title="mod lh_engine::plugins::typed">typed</a></dt><dd>Typed commands for everything the windows do: builder edits and player gaps.
+Typed builder and player commands: everything a window does, by typing.</dd></dl><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><dl class="item-table"><dt><a class="fn" href="fn.add_standard.html" title="fn lh_engine::plugins::add_standard">add_<wbr>standard</a></dt><dd>Adds every standard plugin in one call. The host calls this when it builds the engine.</dd></dl></section></div></main></body></html>

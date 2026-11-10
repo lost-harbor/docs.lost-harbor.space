@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["add_standard"],"mod":["account","behaviors","building","carrier","character","clock","combat","comms","core","crew","factions","guards","help","instances","items","jobs","look","movement","names","npcs","piloting","portraits","shipyard","shops","sims","space","templates","typed"]};

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Player guide</title>
+
+    <link rel="stylesheet" href="../style.css">
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <header class="lh-docs-header">
+  <a class="lh-docs-brand" href="/" aria-label="Lost Harbor documentation home">
+    <img src="/assets/logo-wordmark.svg" alt="Lost Harbor">
+  </a>
+  <span class="lh-docs-label">Documentation</span>
+  <nav aria-label="Documentation">
+    <a href="/player/" aria-current="page" aria-label="Player guide"><span class="lh-nav-full">Player guide</span><span class="lh-nav-short" aria-hidden="true">Player</span></a>
+    <a href="/developer/" aria-label="Developer guide"><span class="lh-nav-full">Developer guide</span><span class="lh-nav-short" aria-hidden="true">Developer</span></a>
+    <a href="/api/" aria-label="API docs"><span class="lh-nav-full">API docs</span><span class="lh-nav-short" aria-hidden="true">API</span></a>
+  </nav>
+</header>
+<main class="doc-content">
+
+
+    <h1 class="title">Player guide</h1>
+    <p>Lost Harbor is a typed MUD with a browser interface.
+You control a character through commands.
+The room panel, map, chart, comms and windows show the results.</p>
+<h2 id="start-playing"><a class="doc-anchor" href="#start-playing">§</a>Start playing</h2>
+<p>Open the <a href="https://dev.lost-harbor.space/">development game</a> for the newest validated build.
+The <a href="https://lost-harbor.space/">production game</a> follows stable releases.</p>
+<p>Use the sign-in screen to enter the game and create a character.
+Choose a name, class and portrait.
+New characters wake in a private copy of the Meridian Works.
+The opening teaches the commands through work orders and exploration.</p>
+<p>The showcase pilot skips the opening and starts at a ship’s helm.
+Use that template to try ships and the shipyard.
+It is a development shortcut, not the normal opening.</p>
+<p>The sign-in flow is a development feature.
+It does not establish a production account-security model.</p>
+<h2 id="read-the-screen"><a class="doc-anchor" href="#read-the-screen">§</a>Read the screen</h2>
+<ul>
+<li>The top ribbon identifies your character and current situation.</li>
+<li>The room panel lists exits, people and objects.</li>
+<li>The map shows rooms. At the helm, the system chart shows space.</li>
+<li>The centre transcript holds command output.</li>
+<li>The social column shows comms, jobs, group and crew.</li>
+<li>Windows hold details such as your character sheet, inventory and ship.</li>
+</ul>
+<p>Click an entity to see its available actions and exact commands.
+Type the same command when you prefer the keyboard.
+Character creation uses the sign-in forms rather than a game command.</p>
+<h2 id="first-commands"><a class="doc-anchor" href="#first-commands">§</a>First commands</h2>
+<p>Type a line in the command input and press Enter.
+Allow queued actions to finish before sending a long sequence.</p>
+<div><table><thead><tr><th>Command</th><th>Result</th></tr></thead><tbody>
+<tr><td><code>look</code></td><td>Read the room again.</td></tr>
+<tr><td><code>examine rail</code></td><td>Inspect a named object.</td></tr>
+<tr><td><code>help</code></td><td>List engine commands by group.</td></tr>
+<tr><td><code>help movement</code></td><td>Read help for a command group.</td></tr>
+<tr><td><code>help get</code></td><td>Read a command’s syntax.</td></tr>
+<tr><td><code>north</code>, <code>south</code>, <code>east</code>, <code>west</code>, <code>up</code>, <code>down</code></td><td>Take an exit.</td></tr>
+<tr><td><code>inventory</code></td><td>List carried items.</td></tr>
+<tr><td><code>score</code></td><td>Read your character’s state.</td></tr>
+<tr><td><code>jobs</code></td><td>Read available and active work.</td></tr>
+<tr><td><code>stop</code></td><td>Stop queued actions.</td></tr>
+</tbody></table>
+</div>
+<p>Use the exit names printed by <code>look</code>.
+Some exits have names such as <code>lifeboat</code> instead of compass directions.
+An error explains a missing target, blocked route or unmet condition.
+Read it before repeating the command.</p>
+<h2 id="items-shops-and-conversations"><a class="doc-anchor" href="#items-shops-and-conversations">§</a>Items, shops and conversations</h2><div class="example-wrap"><pre class="language-text"><code>get tag
+drop tag
+give chit to cook
+ask hesk about quota
+list
+buy gloves
+wear suit
+equipment
+use spanner on valve</code></pre></div>
+<p><code>get</code> takes one matching item unless you request a collection.
+<code>get all corpse</code> retrieves the contents of a corpse.
+<code>wear</code> equips suitable gear.
+<code>remove</code> takes equipped gear off.
+Inspect an object to find its uses.</p>
+<p>Shops list offers through <code>list</code>.
+Conversation topics and work orders provide context for <code>ask</code>.
+<code>accept &lt;number&gt;</code> accepts an available job.
+Some jobs complete on an action. Others use <code>deliver</code>.</p>
+<h2 id="combat-and-recovery"><a class="doc-anchor" href="#combat-and-recovery">§</a>Combat and recovery</h2>
+<p>Use <code>consider &lt;target&gt;</code> before attacking.
+<code>kill &lt;target&gt;</code> starts or continues an attack.
+Skills have their own commands, such as <code>use snap-shot drone</code>.
+Read <code>skills</code> and <code>help</code> for your character’s options.</p>
+<p>Use healing items before your hit points run out.
+The opening includes a scripted death and clone recovery.
+Death can leave equipment on a corpse, so return and inspect the scene.
+The <a href="opening.html">walkthrough</a> explains the opening’s recovery route.</p>
+<p>A suit protects against the opening’s vacuum.
+Wear it before crossing the outer surface.</p>
+<h2 id="your-first-ship"><a class="doc-anchor" href="#your-first-ship">§</a>Your first ship</h2>
+<p>At the helm, type <code>pilot</code> to enter piloting mode.
+Type <code>ship</code> for status and <code>window ship</code> for the ship window.
+The opening’s lifeboat requires repairs before launch.</p>
+<div class="example-wrap"><pre class="language-text"><code>pilot
+launch
+fly spindle
+dock
+refuel
+launch
+fly gate
+jump</code></pre></div>
+<p>These are separate steps, not an instant command sequence.
+Wait for each flight to arrive before docking or jumping.
+Watch the chart and read the transcript for progress and failures.</p>
+<p><code>scan</code> reveals contacts.
+<code>fleet</code> lists owned ships.
+At a shipyard, <code>shipyard</code> lists offers.
+Use <code>help &lt;command&gt;</code> before buying, selling or ordering crew.
+Fuel, location, ownership and available berths constrain ship actions.</p>
+<h2 id="browser-controls"><a class="doc-anchor" href="#browser-controls">§</a>Browser controls</h2>
+<p>Some commands change only the browser interface.
+Engine <code>help</code> does not list these local commands.</p>
+<div><table><thead><tr><th>Command</th><th>Result</th></tr></thead><tbody>
+<tr><td><code>window character</code></td><td>Open the character sheet.</td></tr>
+<tr><td><code>window inventory</code></td><td>Open inventory.</td></tr>
+<tr><td><code>window chart</code></td><td>Open the system chart.</td></tr>
+<tr><td><code>window settings</code></td><td>Open settings.</td></tr>
+<tr><td><code>map deck</code>, <code>map system</code></td><td>Choose the map card’s view.</td></tr>
+<tr><td><code>chart fit</code></td><td>Fit the chart to its contents.</td></tr>
+<tr><td><code>filter all</code></td><td>Show all transcript categories.</td></tr>
+<tr><td><code>clear</code></td><td>Clear the visible transcript.</td></tr>
+</tbody></table>
+</div>
+<p>Clearing the transcript does not reset the game.
+The interface targets desktop viewports of 1920x960 and 1600x860.
+Touch input and smaller layouts are not established interfaces yet.</p>
+<h2 id="saves-and-hosting-modes"><a class="doc-anchor" href="#saves-and-hosting-modes">§</a>Saves and hosting modes</h2>
+<p>The public Pages sites run the engine in a Web Worker.
+They store saves in this browser’s IndexedDB.
+No multiplayer game server runs on those sites.</p>
+<p>Saves belong to the site’s origin and browser profile.
+Development and production have separate saves.
+Changing browsers or devices does not transfer a save.
+Clearing site data removes local saves.
+Private browsing can discard them when the session ends.</p>
+<p>A native development server keeps its own storage.
+Adding <code>?local=1</code> to its URL runs the browser engine instead.
+That is a different save from the native server’s database.</p>
+<h2 id="opening-walkthrough"><a class="doc-anchor" href="#opening-walkthrough">§</a>Opening walkthrough</h2>
+<p><a href="opening.html">Read the complete Meridian Works walkthrough</a>.
+It contains story, puzzle and route spoilers through the first gate jump.</p>
+
+    </main>
+
+
+</body>
+</html>

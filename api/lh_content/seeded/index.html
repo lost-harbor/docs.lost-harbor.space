@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Phrase slots in record text, written with a seed from the record id. Phrase slots inside record text, written once per record."><title>lh_content::seeded - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-0c87338a.css"><script id="default-settings" 
+data-use_system_theme="false"
+data-theme="dark"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="lh_content" data-themes="" data-resource-suffix="" data-rustdoc-version="1.99.1 (58cf8f9c3 2026-10-13)" data-channel="1.99.1" data-search-js="search-cf4fc35e.js" data-stringdex-js="stringdex-b5109af9.js" data-settings-js="settings-170eb4bf.js" ><script src="../../static.files/storage-41dd4d93.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../static.files/main-417ebf0a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-9f56287d.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc mod"><a class="skip-main-content" href="#main-content">Skip to main content</a><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><header class="lh-docs-header">
+  <a class="lh-docs-brand" href="/" aria-label="Lost Harbor documentation home">
+    <img src="/assets/logo-wordmark.svg" alt="Lost Harbor">
+  </a>
+  <span class="lh-docs-label">Documentation</span>
+  <nav aria-label="Documentation">
+    <a href="/player/" aria-label="Player guide"><span class="lh-nav-full">Player guide</span><span class="lh-nav-short" aria-hidden="true">Player</span></a>
+    <a href="/developer/" aria-label="Developer guide"><span class="lh-nav-full">Developer guide</span><span class="lh-nav-short" aria-hidden="true">Developer</span></a>
+    <a href="/api/" aria-current="page" aria-label="API docs"><span class="lh-nav-full">API docs</span><span class="lh-nav-short" aria-hidden="true">API</span></a>
+  </nav>
+</header>
+
+<rustdoc-topbar><h2><a href="#">Module seeded</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../lh_content/index.html">lh_<wbr>content</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module seeded</a></h2><h3><a href="#functions">Module Items</a></h3><ul class="block"><li><a href="#functions" title="Functions">Functions</a></li></ul></section><div id="rustdoc-modnav"><h2 class="in-crate"><a href="../index.html">In crate lh_<wbr>content</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content" tabindex="-1"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../index.html">lh_content</a></div><h1>Module <span>seeded</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Phrase slots in record text, written with a seed from the record id.
+Phrase slots inside record text, written once per record.</p>
+<p>An item, NPC or room can use phrase slots in its text, for example an
+item named <code>&lt;house:name&gt; sidearm</code> with the keyword <code>&lt;house:name&gt;</code>. The
+slots are written with a seed made from the record’s kind and id, so
+the text is the same on every load, on every host, for every player.
+Every field of one record starts from that same seed, so the first slot
+of the name and the first slot of the look text write the same word
+when they name the same phrase.</p>
+<p>Record text names phrases, never chains. A chain is an ingredient. A
+phrase is the tag that the world uses. So a slot such as
+<code>&lt;chain:house:name&gt;</code> in an item name is a problem that the validator
+reports, and the text stays raw. This keeps every tag in one place: a
+builder who changes a phrase changes every record that uses it.</p>
+<p>Each record also has a <code>roll</code> number, 0 by default. A builder who
+wants other text for the same record raises the roll. The seed then
+changes, the id stays, and no reference to the record breaks.</p>
+<p>The content files keep the slots. <a href="fn.shown.html" title="fn lh_content::seeded::shown"><code>shown</code></a> makes a copy of the content
+with the slots written out, and the game shows that copy. The builder
+edits the copy with the slots, so a save never loses them.</p>
+<p>The written fields:</p>
+<ul>
+<li>item: <code>name</code>, <code>plural</code>, <code>keywords</code>, <code>line</code>, <code>look</code>;</li>
+<li>NPC: <code>name</code>, <code>short</code>, <code>line</code>, <code>keywords</code>, <code>look</code>, <code>say_name</code>;</li>
+<li>room: <code>name</code>, <code>description</code>.</li>
+</ul>
+<p>A keyword with a slot can write more than one word. Each word becomes
+its own keyword, in lower case.</p>
+<p>Pattern: visitor. One function per kind visits each text field, and
+the same visit serves both writing and checking.</p>
+</div></details><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><dl class="item-table"><dt><a class="fn" href="fn.chain_refs.html" title="fn lh_content::seeded::chain_refs">chain_<wbr>refs</a></dt><dd>The chain ids that a record text names directly, in order.</dd><dt><a class="fn" href="fn.fields.html" title="fn lh_content::seeded::fields">fields</a></dt><dd>The text that players see for each field of one record that holds
+slots, by field name. List fields such as <code>keywords</code> join their
+entries with “, “. Fields with no slots are left out, so the map is
+empty for most records. The builder shows it beside the raw text.</dd><dt><a class="fn" href="fn.problems.html" title="fn lh_content::seeded::problems">problems</a></dt><dd>The slot problems in one record’s text, as (field, problem) pairs.</dd><dt><a class="fn" href="fn.record_seed.html" title="fn lh_content::seeded::record_seed">record_<wbr>seed</a></dt><dd>The seed of one record at one roll. Roll 0 is <a href="fn.seed_of.html" title="fn lh_content::seeded::seed_of"><code>seed_of</code></a> itself, so
+records made before rolls existed keep their text.</dd><dt><a class="fn" href="fn.seed_of.html" title="fn lh_content::seeded::seed_of">seed_of</a></dt><dd>The seed of one record: the FNV-1a hash of <code>kind:id</code>.</dd><dt><a class="fn" href="fn.shown.html" title="fn lh_content::seeded::shown">shown</a></dt><dd>A copy of the content with every slot in record text written out.
+A field whose slots fail stays as it is. The validator reports it.</dd><dt><a class="fn" href="fn.tag_users.html" title="fn lh_content::seeded::tag_users">tag_<wbr>users</a></dt><dd>Every record that names <code>id</code> in a slot, as (kind, id) pairs.</dd><dt><a class="fn" href="fn.write.html" title="fn lh_content::seeded::write">write</a></dt><dd>The text with its slots written from <code>seed</code>. <code>Ok(None)</code> when the text
+has no slots.</dd><dt><a class="fn" href="fn.write_record.html" title="fn lh_content::seeded::write_record">write_<wbr>record</a></dt><dd>Record text with its slots written, like <a href="fn.write.html" title="fn lh_content::seeded::write"><code>write()</code></a>, but a slot that
+names a chain is an error. Records reference phrases, not chains.</dd></dl></section></div></main></body></html>

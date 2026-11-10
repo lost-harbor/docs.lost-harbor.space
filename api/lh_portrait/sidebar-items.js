@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["VERSION"],"fn":["describe","family_of","forms","from_hex","make_seed","offer","render_svg","seed_for_kind","seed_for_name","seed_or_name","to_hex","version_of"],"mod":["alien","beast","draw","face","machine"],"struct":["Rng"]};

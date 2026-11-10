@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["ALL_DIRS","DEV_USER"],"enum":["CharTab","Filter","Screen"],"fn":["comm_tab_for","dir_label","dir_word","fmt_eta","fmt_secs","focus_input","initials","name_colour","parse_dir","use_app"],"struct":["App","ClockStamp","Group","Pin","Settings","TLine","VerbMenu"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["arrive","find_room","local_map_of","path","place","take_exit"],"struct":["MovementPlugin"]};

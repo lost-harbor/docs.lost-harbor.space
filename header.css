@@ -1,0 +1,124 @@
+:root {
+  --lh-bg: #0b0d0f;
+  --lh-panel: #121517;
+  --lh-panel2: #171b1e;
+  --lh-raise: #1e2328;
+  --lh-line: #232930;
+  --lh-line2: #2f363e;
+  --lh-ink: #eceff1;
+  --lh-ink2: #c5cdd3;
+  --lh-dim: #90a4ae;
+  --lh-accent: #f47720;
+  --lh-accent-hover: #ffad70;
+}
+
+.lh-docs-header {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 52px;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--lh-line);
+  background: var(--lh-panel);
+  color: var(--lh-ink);
+  font: 500 14px/1.4 Rubik, system-ui, sans-serif;
+}
+
+.lh-docs-brand {
+  display: flex;
+  flex: none;
+  align-items: center;
+}
+
+.lh-docs-brand img {
+  display: block;
+  width: 206px;
+  height: 20px;
+}
+
+.lh-docs-label {
+  flex: none;
+  padding-left: 14px;
+  border-left: 1px solid var(--lh-line);
+  color: var(--lh-dim);
+}
+
+.lh-docs-header nav {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.lh-docs-header nav a {
+  flex: none;
+  padding: 6px 11px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  color: var(--lh-ink2);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lh-docs-header nav a:hover {
+  background: var(--lh-raise);
+  color: var(--lh-ink);
+}
+
+.lh-docs-header nav a[aria-current="page"] {
+  border-color: var(--lh-accent);
+  color: var(--lh-accent);
+}
+
+.lh-docs-header a:focus-visible {
+  outline: 2px solid var(--lh-accent);
+  outline-offset: 2px;
+}
+
+.lh-nav-short {
+  display: none;
+}
+
+@media (max-width: 48rem) {
+  .lh-docs-header {
+    gap: 8px;
+    padding: 0 10px;
+  }
+
+  .lh-docs-brand img {
+    width: 124px;
+    height: 12px;
+  }
+
+  .lh-docs-label {
+    display: none;
+  }
+
+  .lh-docs-header nav {
+    justify-content: flex-start;
+  }
+
+  .lh-docs-header nav a {
+    padding: 6px 7px;
+  }
+
+  .lh-nav-full {
+    display: none;
+  }
+
+  .lh-nav-short {
+    display: inline;
+  }
+}
+
+@media (max-width: 24rem) {
+  .lh-docs-brand img {
+    width: 96px;
+    height: auto;
+  }
+}

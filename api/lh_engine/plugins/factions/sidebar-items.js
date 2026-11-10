@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["UNKNOWN_NAME"],"fn":["standing_of","standing_word"],"struct":["FactionsPlugin","ScannedShips","Standing"]};

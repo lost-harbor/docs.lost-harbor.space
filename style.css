@@ -1,0 +1,147 @@
+@import url("/header.css");
+
+:root {
+  color-scheme: dark;
+  font-family: Rubik, system-ui, sans-serif;
+  line-height: 1.65;
+}
+
+body {
+  margin: 0;
+  background: var(--lh-bg);
+  color: var(--lh-ink);
+  font-size: 16px;
+}
+
+.doc-content {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3rem 2rem 5rem;
+}
+
+h1, h2, h3 {
+  color: var(--lh-ink);
+  line-height: 1.25;
+  scroll-margin-top: 5rem;
+}
+
+h1 {
+  margin: 0 0 1.5rem;
+  font-size: clamp(1.9rem, 3vw, 2.5rem);
+}
+
+h2 {
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--lh-line);
+  font-size: 1.35rem;
+}
+
+p, li {
+  color: var(--lh-ink2);
+}
+
+a {
+  color: var(--lh-accent);
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--lh-accent-hover);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--lh-accent);
+  outline-offset: 3px;
+}
+
+.doc-anchor {
+  padding-right: 0.4rem;
+  color: var(--lh-dim);
+  text-decoration: none;
+}
+
+pre, code {
+  font-family: "Roboto Mono", ui-monospace, Menlo, monospace;
+}
+
+code {
+  padding: 0.1em 0.25em;
+  border-radius: 4px;
+  background: var(--lh-panel2);
+  color: var(--lh-ink);
+}
+
+pre {
+  overflow: auto;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--lh-line);
+  border-radius: 9px;
+  background: var(--lh-panel);
+}
+
+pre code {
+  padding: 0;
+  background: transparent;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--lh-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--lh-panel);
+  color: var(--lh-ink);
+}
+
+td {
+  color: var(--lh-ink2);
+}
+
+.doc-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 2rem 0;
+}
+
+.doc-card {
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--lh-line);
+  border-radius: 9px;
+  background: var(--lh-panel);
+}
+
+.doc-card h2 {
+  margin: 0 0 0.75rem;
+  padding: 0;
+  border: 0;
+  font-size: 1.15rem;
+}
+
+.doc-card p {
+  margin: 0;
+}
+
+@media (max-width: 48rem) {
+  .doc-content {
+    padding: 2rem 1rem 4rem;
+  }
+
+  .doc-cards {
+    grid-template-columns: 1fr;
+  }
+
+  table {
+    display: block;
+    overflow: auto;
+  }
+}

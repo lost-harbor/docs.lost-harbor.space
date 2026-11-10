@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Paint","Sign"],"fn":["mark","wear_of"],"struct":["Mark","Markings"]};

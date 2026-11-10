@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["describe_room","exit_views","presences","room_view_of","viewpoint","walk_secs"],"struct":["LookPlugin"]};

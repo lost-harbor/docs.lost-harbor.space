@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Status"],"fn":["connect","disconnect","send"],"struct":["WorkerTransport","WsTransport"],"trait":["Transport"],"type":["OnMsg","OnStatus"]};

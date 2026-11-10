@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["MAX_DEPTH"],"enum":["Choice","Kind","Piece"],"fn":["missing","parse","refs"],"struct":["Library","Phrase"]};

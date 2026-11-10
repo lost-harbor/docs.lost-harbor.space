@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["RECORD_KIND"],"fn":["apply","from_record","overlay","parse_key","record_key","to_record"],"struct":["ContentEdits"]};

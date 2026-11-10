@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["ABILITIES"],"fn":["ability_index","check","class","defense","hp_at_level","hp_per_level","max_cells","max_kg","max_strain","modifier","proficiency","save_bonus","skill_bonus","starting_hp","strain","xp_for"]};

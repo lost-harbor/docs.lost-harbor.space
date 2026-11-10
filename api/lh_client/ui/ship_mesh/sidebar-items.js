@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Assembly"],"fn":["build","cross_section","front_facets","profile_facets","to_plan","to_world"],"struct":["Face"]};

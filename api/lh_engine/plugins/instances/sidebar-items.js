@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["ensure","owner_of","read_book","seal"],"struct":["Book","FloorItem","InstancesPlugin","SavedDoor","Snapshot"]};

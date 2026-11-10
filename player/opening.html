@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>The opening: Meridian Works to the first jump</title>
+
+    <link rel="stylesheet" href="../style.css">
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <header class="lh-docs-header">
+  <a class="lh-docs-brand" href="/" aria-label="Lost Harbor documentation home">
+    <img src="/assets/logo-wordmark.svg" alt="Lost Harbor">
+  </a>
+  <span class="lh-docs-label">Documentation</span>
+  <nav aria-label="Documentation">
+    <a href="/player/" aria-current="page" aria-label="Player guide"><span class="lh-nav-full">Player guide</span><span class="lh-nav-short" aria-hidden="true">Player</span></a>
+    <a href="/developer/" aria-label="Developer guide"><span class="lh-nav-full">Developer guide</span><span class="lh-nav-short" aria-hidden="true">Developer</span></a>
+    <a href="/api/" aria-label="API docs"><span class="lh-nav-full">API docs</span><span class="lh-nav-short" aria-hidden="true">API</span></a>
+  </nav>
+</header>
+<main class="doc-content">
+
+
+    <h1 class="title">The opening: Meridian Works to the first jump</h1>
+    <p><strong>Spoilers:</strong> this page describes the full opening, including its scripted death and escape.</p>
+<p>Start with a new character, not the showcase template.
+The route below follows the shipped opening walkthrough test.
+The test uses a Pilot.
+Combat skills and outcomes differ between classes.</p>
+<p>Commands in each block run in order.
+Type one line at a time and wait for actions to finish.
+Use <code>look</code>, <code>inventory</code> and <code>jobs</code> whenever you lose your place.
+A work day advances when you sleep in your bunk, not when you wait in a corridor.</p>
+<p>On this page:
+<a href="#day-1-intake">Intake</a>,
+<a href="#day-2-the-first-shift">first shift</a>,
+<a href="#day-3-the-accident">accident</a>,
+<a href="#day-4-finish-the-term">term end</a>,
+<a href="#day-5-beyond-the-gate">escape</a>,
+<a href="#repair-and-launch-the-lifeboat">lifeboat</a>,
+<a href="#first-flight-and-gate-jump">first jump</a>.</p>
+<h2 id="day-1-intake"><a class="doc-anchor" href="#day-1-intake">§</a>Day 1: intake</h2>
+<p>From the clone bay, reach the work hall:</p>
+<div class="example-wrap"><pre class="language-text"><code>look
+north
+north
+north
+accept 101</code></pre></div>
+<p>Go to your bunk and collect the tag:</p>
+<div class="example-wrap"><pre class="language-text"><code>south
+south
+west
+south
+examine rail
+get tag
+drop tag
+get tag</code></pre></div>
+<p>Return to the hall for the next order:</p>
+<div class="example-wrap"><pre class="language-text"><code>north
+east
+north
+north
+accept 102
+get chit
+south
+south
+east
+give chit to cook</code></pre></div>
+<p>You are now in the canteen.
+The egress gate remains closed.
+Its drones warn you on the first attempt to go east and stun you on a repeated attempt.
+There is no need to test that gate yet.</p>
+<p>Return to the bunk and sleep:</p>
+<div class="example-wrap"><pre class="language-text"><code>west
+west
+south
+sleep</code></pre></div>
+<p>Wait for the next work day before leaving the bunk.</p>
+<h2 id="day-2-the-first-shift"><a class="doc-anchor" href="#day-2-the-first-shift">§</a>Day 2: the first shift</h2>
+<p>Return to the hall and ask about the work:</p>
+<div class="example-wrap"><pre class="language-text"><code>north
+east
+north
+north
+accept 103
+ask hesk about quota
+east
+east
+ask ludo about line
+west
+west
+accept 104
+west
+list
+buy gloves
+east
+accept 105
+east
+north
+get spanner
+use spanner on valve</code></pre></div>
+<p>Keep the spanner. You need it again at the lifeboat.
+Return to the bunk:</p>
+<div class="example-wrap"><pre class="language-text"><code>south
+west
+south
+south
+west
+south
+sleep</code></pre></div><h2 id="day-3-the-accident"><a class="doc-anchor" href="#day-3-the-accident">§</a>Day 3: the accident</h2>
+<p>Take the press order:</p>
+<div class="example-wrap"><pre class="language-text"><code>north
+east
+north
+north
+accept 106
+east
+unjam</code></pre></div>
+<p>The press accident kills your character and returns them to the clone bay.
+The replacement cost is part of the opening.</p>
+<p>Go back to the hall:</p>
+<div class="example-wrap"><pre class="language-text"><code>north
+north
+north
+ask hesk about accident
+accept 107
+east
+east
+calibrate</code></pre></div>
+<p>Repeat <code>calibrate</code> until the work succeeds and the shift completes.
+Wait between attempts and read the result.
+Then return to the bunk:</p>
+<div class="example-wrap"><pre class="language-text"><code>west
+west
+south
+south
+west
+south
+sleep</code></pre></div><h2 id="day-4-finish-the-term"><a class="doc-anchor" href="#day-4-finish-the-term">§</a>Day 4: finish the term</h2>
+<p>Collect the manifest and return it:</p>
+<div class="example-wrap"><pre class="language-text"><code>north
+east
+north
+north
+accept 108
+north
+ask wennet about manifest
+south
+give manifest to hesk
+accept 109
+east
+east
+get crate
+south
+deliver</code></pre></div>
+<p>Completing the last order does not open the gate at once.
+The post holds it until the next work day.
+Return to the bunk instead of challenging the drones:</p>
+<div class="example-wrap"><pre class="language-text"><code>north
+west
+west
+south
+south
+west
+south
+sleep</code></pre></div><h2 id="day-5-beyond-the-gate"><a class="doc-anchor" href="#day-5-beyond-the-gate">§</a>Day 5: beyond the gate</h2>
+<p>Reach the egress and inspect it:</p>
+<div class="example-wrap"><pre class="language-text"><code>north
+east
+north
+look
+east
+east
+north
+search
+get coupling</code></pre></div>
+<p>You are in the cache.
+If the search finds no coupling, repeat <code>search</code> and then <code>get coupling</code> until you carry it.
+Take the medkit:</p>
+<div class="example-wrap"><pre class="language-text"><code>get medkit
+south
+consider drone</code></pre></div>
+<p>The drone blocks the eastern crawlway.
+A Pilot can open the fight with:</p>
+<div class="example-wrap"><pre class="language-text"><code>use snap-shot drone
+kill drone</code></pre></div>
+<p>Use your class’s available skills instead if needed.
+Continue fighting until the drone falls.
+Heal with <code>use stim</code> or <code>use medkit</code> when your hit points run low.</p>
+<p>If you die, you wake in the clone bay.
+Return with <code>north</code>, <code>north</code>, <code>east</code>, <code>east</code>.
+Use <code>get all corpse</code> to recover your kit, check <code>inventory</code>, then fight again.</p>
+<p>After the drone falls:</p>
+<div class="example-wrap"><pre class="language-text"><code>east
+up
+get suit
+wear suit
+up
+east
+east</code></pre></div>
+<p>Keep the suit on across the vacuum.
+You have reached the lifeboat dig.</p>
+<h2 id="repair-and-launch-the-lifeboat"><a class="doc-anchor" href="#repair-and-launch-the-lifeboat">§</a>Repair and launch the lifeboat</h2>
+<p>Complete the external repairs:</p>
+<div class="example-wrap"><pre class="language-text"><code>accept 110
+use coupling on line
+use spanner on vanes
+lifeboat
+up
+coax</code></pre></div>
+<p>Repeat <code>coax</code> until the drive wakes.
+All three repairs must succeed before launch:
+the line, the vanes and the drive.</p>
+<div class="example-wrap"><pre class="language-text"><code>pilot
+launch</code></pre></div>
+<p>Launching seals the Works permanently for this character.
+The game tells you that the way back has closed.
+Your lifeboat is now in the Verge system.</p>
+<h2 id="first-flight-and-gate-jump"><a class="doc-anchor" href="#first-flight-and-gate-jump">§</a>First flight and gate jump</h2>
+<p>Set a course:</p>
+<div class="example-wrap"><pre class="language-text"><code>fly spindle</code></pre></div>
+<p>Wait until the flight arrives.
+Then:</p>
+<div class="example-wrap"><pre class="language-text"><code>dock
+refuel
+launch
+fly gate</code></pre></div>
+<p>Wait for arrival at the gate before typing:</p>
+<div class="example-wrap"><pre class="language-text"><code>jump</code></pre></div>
+<p>The first gate jump reaches Brindle.
+The opening is complete.
+Your character now lives in shared-world space rather than the private Works instance.
+On the public static site, that world still runs locally in your browser.</p>
+<p><a href="./">Return to the player guide</a>.</p>
+
+    </main>
+
+
+</body>
+</html>

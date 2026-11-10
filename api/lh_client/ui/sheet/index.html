@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="The ship sheet: the top view, the side view and the front view of one hull on one drawing, all at one scale."><title>lh_client::ui::sheet - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-0c87338a.css"><script id="default-settings" 
+data-use_system_theme="false"
+data-theme="dark"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="lh_client" data-themes="" data-resource-suffix="" data-rustdoc-version="1.99.1 (58cf8f9c3 2026-10-13)" data-channel="1.99.1" data-search-js="search-cf4fc35e.js" data-stringdex-js="stringdex-b5109af9.js" data-settings-js="settings-170eb4bf.js" ><script src="../../../static.files/storage-41dd4d93.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-417ebf0a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-9f56287d.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"></head><body class="rustdoc mod"><a class="skip-main-content" href="#main-content">Skip to main content</a><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><header class="lh-docs-header">
+  <a class="lh-docs-brand" href="/" aria-label="Lost Harbor documentation home">
+    <img src="/assets/logo-wordmark.svg" alt="Lost Harbor">
+  </a>
+  <span class="lh-docs-label">Documentation</span>
+  <nav aria-label="Documentation">
+    <a href="/player/" aria-label="Player guide"><span class="lh-nav-full">Player guide</span><span class="lh-nav-short" aria-hidden="true">Player</span></a>
+    <a href="/developer/" aria-label="Developer guide"><span class="lh-nav-full">Developer guide</span><span class="lh-nav-short" aria-hidden="true">Developer</span></a>
+    <a href="/api/" aria-current="page" aria-label="API docs"><span class="lh-nav-full">API docs</span><span class="lh-nav-short" aria-hidden="true">API</span></a>
+  </nav>
+</header>
+
+<rustdoc-topbar><h2><a href="#">Module sheet</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../lh_client/index.html">lh_<wbr>client</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module sheet</a></h2><h3><a href="#structs">Module Items</a></h3><ul class="block"><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#functions" title="Functions">Functions</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="../index.html">In lh_<wbr>client::<wbr>ui</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content" tabindex="-1"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">lh_client</a>::<wbr><a href="../index.html">ui</a></div><h1>Module <span>sheet</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>The ship sheet: the top view, the side view and the front view of one
+hull on one drawing, all at one scale.</p>
+<p>The top view comes from <a href="../blueprint/index.html" title="mod lh_client::ui::blueprint"><code>crate::ui::blueprint</code></a> and the side and front
+views from <a href="../profile/index.html" title="mod lh_client::ui::profile"><code>crate::ui::profile</code></a>. Each view is drawn in its own nested
+SVG, and the sheet only places them:</p>
+<ul>
+<li>The top view and the side view share the bow face of the first row of
+rooms, so a frame in one view lies over the same frame in the other.</li>
+<li>Every view keeps the centre line of the main level on one height
+where the views sit side by side.</li>
+<li><a href="fn.arrange.html" title="fn lh_client::ui::sheet::arrange"><code>arrange</code></a> picks one of two layouts. The top view goes over the side
+view, or to the left of it, whichever lets the ship draw larger in the
+space the sheet gets. A tie, or a small gain, keeps top over side.</li>
+</ul>
+<p>The sheet has two looks. The plain look is the drafting schematic. The
+drawn look paints the hull in the colours of its style, lit from the top
+left like the portraits: a lit half and a shaded half, a soft run of
+tone across each half, fine plate texture and trim stripes. The shapes
+are the same in both looks. The nav chart is meant to use the drawn top
+view at close zoom.</p>
+<p>Design pattern: Composite. The sheet is one drawing made of views that
+each also draw alone.</p>
+</div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.Arrangement.html" title="struct lh_client::ui::sheet::Arrangement">Arrangement</a></dt><dd>Where each view of a sheet goes, in grid units.</dd><dt><a class="struct" href="struct.Frame.html" title="struct lh_client::ui::sheet::Frame">Frame</a></dt><dd>The size of one view and the two lines that place it: the x of the bow
+face and the y of the centre line, all in grid units. The front view
+has no bow face, so its <code>bow</code> is unused.</dd><dt><a class="struct" href="struct.ShipSheetProps.html" title="struct lh_client::ui::sheet::ShipSheetProps">Ship<wbr>Sheet<wbr>Props</a></dt><dd>Props for the <a href="fn.ShipSheet.html" title="fn lh_client::ui::sheet::ShipSheet"><code>ShipSheet</code></a> component.</dd><dt><a class="struct" href="struct.Tones.html" title="struct lh_client::ui::sheet::Tones">Tones</a></dt><dd>The tones of one paint scheme, as <code>#rrggbb</code>.</dd></dl><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><dl class="item-table"><dt><a class="fn" href="fn.ShipSheet.html" title="fn lh_client::ui::sheet::ShipSheet">Ship<wbr>Sheet</a></dt><dd>The views of one ship on one sheet, at one scale.</dd><dt><a class="fn" href="fn.arrange.html" title="fn lh_client::ui::sheet::arrange">arrange</a></dt><dd>Picks the layout of a sheet for a space of <code>aspect</code> width per unit of
+height. Top over side wins unless side by side draws the ship at least
+1.05 times larger.</dd><dt><a class="fn" href="fn.drawn_defs.html" title="fn lh_client::ui::sheet::drawn_defs">drawn_<wbr>defs</a></dt><dd>The SVG defs of a drawn view: the light gradient, the plate texture,
+the hazard stripes and the clip to the hull.</dd><dt><a class="fn" href="fn.fresh_id.html" title="fn lh_client::ui::sheet::fresh_id">fresh_<wbr>id</a></dt><dd>A fresh id for SVG defs. Every drawn view on a page needs its own
+gradient and clip ids, or the views would share the first one.</dd><dt><a class="fn" href="fn.tone.html" title="fn lh_client::ui::sheet::tone">tone</a></dt><dd>Mixes a colour toward white for a positive <code>f</code> or toward black for a
+negative one. <code>f</code> runs from -1 to 1.</dd><dt><a class="fn" href="fn.tones.html" title="fn lh_client::ui::sheet::tones">tones</a></dt><dd>The tones of a paint scheme. A plain scheme gets worn grey plate with
+amber trim.</dd></dl></section></div></main></body></html>

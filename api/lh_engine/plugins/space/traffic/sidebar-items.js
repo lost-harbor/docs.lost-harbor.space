@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["LINE_GAP","PASS_COOLDOWN","PASS_RANGE"],"fn":["contacts","find_contact","init_npcs","masked_id","nearest","nearest_of","pass_check_due","register","report","scan_contact","sync_system","tick"],"struct":["NpcShip","NpcShips","TrafficLog"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["CHAIN_PREFIX","MAX_DISTILL","MAX_ORDER"],"fn":["generate","is_banned"],"mod":["corpus","phrase","weighted"],"struct":["Chain","Distill","Rng","Style"]};

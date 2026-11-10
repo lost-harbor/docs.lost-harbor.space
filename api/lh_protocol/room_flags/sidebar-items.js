@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["ROOM_FLAGS"],"enum":["FlagGroup","HullFace","RoomSize"],"struct":["DeckRoom","FlagInfo","RoomFlags"]};

@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="NPC behaviors: data-driven triggers, conditions, and actions. NPC behaviors: data-driven reactions, a modern take on CircleMUD’s special procedures and DG script triggers."><title>lh_engine::plugins::behaviors - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-0c87338a.css"><script id="default-settings" 
+data-use_system_theme="false"
+data-theme="dark"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="lh_engine" data-themes="" data-resource-suffix="" data-rustdoc-version="1.99.1 (58cf8f9c3 2026-10-13)" data-channel="1.99.1" data-search-js="search-cf4fc35e.js" data-stringdex-js="stringdex-b5109af9.js" data-settings-js="settings-170eb4bf.js" ><script src="../../../static.files/storage-41dd4d93.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-417ebf0a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-9f56287d.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"></head><body class="rustdoc mod"><a class="skip-main-content" href="#main-content">Skip to main content</a><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><header class="lh-docs-header">
+  <a class="lh-docs-brand" href="/" aria-label="Lost Harbor documentation home">
+    <img src="/assets/logo-wordmark.svg" alt="Lost Harbor">
+  </a>
+  <span class="lh-docs-label">Documentation</span>
+  <nav aria-label="Documentation">
+    <a href="/player/" aria-label="Player guide"><span class="lh-nav-full">Player guide</span><span class="lh-nav-short" aria-hidden="true">Player</span></a>
+    <a href="/developer/" aria-label="Developer guide"><span class="lh-nav-full">Developer guide</span><span class="lh-nav-short" aria-hidden="true">Developer</span></a>
+    <a href="/api/" aria-current="page" aria-label="API docs"><span class="lh-nav-full">API docs</span><span class="lh-nav-short" aria-hidden="true">API</span></a>
+  </nav>
+</header>
+
+<rustdoc-topbar><h2><a href="#">Module behaviors</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../lh_engine/index.html">lh_<wbr>engine</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module behaviors</a></h2><h3><a href="#structs">Module Items</a></h3><ul class="block"><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#functions" title="Functions">Functions</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="../index.html">In lh_<wbr>engine::<wbr>plugins</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content" tabindex="-1"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">lh_engine</a>::<wbr><a href="../index.html">plugins</a></div><h1>Module <span>behaviors</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>NPC behaviors: data-driven triggers, conditions, and actions.
+NPC behaviors: data-driven reactions, a modern take on CircleMUD’s special
+procedures and DG script triggers.</p>
+<p>A behavior is a content record (<code>lh_content::Behavior</code>) with a list of
+rules. Each rule has a trigger, conditions, and actions. An NPC lists the
+behaviors it uses by id, so many NPCs can share one. Builders edit the
+rules as structured data in the builder, never as script text.</p>
+<p>This plugin is the runtime. It turns game events into triggers and runs
+the matching rules:</p>
+<div><table><thead><tr><th>Trigger</th><th>Source in the game</th></tr></thead><tbody>
+<tr><td><code>Enter</code></td><td><code>Arrived</code>, when a player walks into the NPC’s room</td></tr>
+<tr><td><code>Speech</code></td><td><code>Spoke</code>, when a player says a keyword in the NPC’s room</td></tr>
+<tr><td><code>Asked</code></td><td><code>Asked</code>, raised by <code>ask &lt;npc&gt; about &lt;topic&gt;</code></td></tr>
+<tr><td><code>Given</code></td><td>the <code>give</code> command, when the item goes to this NPC</td></tr>
+<tr><td><code>Command</code></td><td>an unknown verb typed in the NPC’s room</td></tr>
+<tr><td><code>Timer</code></td><td>every <code>secs</code> seconds while a player is in the room</td></tr>
+<tr><td><code>Clock</code></td><td>when the station clock reaches the time</td></tr>
+<tr><td><code>Called</code></td><td>the <code>Run</code> action of another rule</td></tr>
+</tbody></table>
+</div>
+<p>A rule runs its <code>then</code> actions when every condition holds. Otherwise it
+runs its <code>otherwise</code> actions. Conditions and actions about “the actor” use
+the player who caused the trigger. <code>Timer</code> and <code>Clock</code> rules have no
+actor, so actor conditions fail and actor actions do nothing.</p>
+<p>This plugin registers:</p>
+<ul>
+<li>Content kind: <code>behavior</code>, with an apply step that resets its timers.</li>
+<li>Component: <code>Flags</code>, the named flags a player has, saved under <code>flags</code>.</li>
+<li>Resource: <code>BehaviorClock</code>, the timer and clock bookkeeping.</li>
+<li>Observers: <code>Arrived</code>, <code>Spoke</code>, and <code>Asked</code>.</li>
+<li>Command: <code>give</code>, hidden, at priority 4. It sits between the jobs
+plugin’s <code>give</code> (5) and the ordinary <code>give</code> (0).</li>
+<li>Fallback: <code>command_fallback</code>, for <code>Command</code> triggers.</li>
+<li>System: <code>tick_behaviors</code> in <code>Stage::Update</code>, for <code>Timer</code> and <code>Clock</code>.</li>
+</ul>
+<p>Independence: besides core modules, it reads <code>clock::Clock</code> for the time,
+<code>jobs::Jobs</code> for job conditions, and <code>items::match_items</code> to read the item
+word in <code>give</code>. Job actions go through the <code>StartJob</code> and <code>AdvanceJob</code>
+events, so it never calls the jobs plugin.</p>
+</div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.BehaviorClock.html" title="struct lh_engine::plugins::behaviors::BehaviorClock">Behavior<wbr>Clock</a></dt><dd>Bookkeeping for <code>Timer</code> and <code>Clock</code> triggers.</dd><dt><a class="struct" href="struct.BehaviorsPlugin.html" title="struct lh_engine::plugins::behaviors::BehaviorsPlugin">Behaviors<wbr>Plugin</a></dt><dd>Adds the behavior runtime.</dd><dt><a class="struct" href="struct.Flags.html" title="struct lh_engine::plugins::behaviors::Flags">Flags</a></dt><dd>The named flags a player carries, such as <code>met-clerk</code>. Behaviors set,
+clear, and test them. They are saved with the character.</dd></dl><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><dl class="item-table"><dt><a class="fn" href="fn.holds_all.html" title="fn lh_engine::plugins::behaviors::holds_all">holds_<wbr>all</a></dt><dd>True when every condition holds for <code>actor</code>, with no NPC involved. Other
+plugins use it for exit guards and job gates. Conditions about the actor
+read the actor, and a <code>Day</code> condition reads the actor’s room.</dd></dl></section></div></main></body></html>

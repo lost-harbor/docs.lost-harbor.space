@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Developer guide</title>
+
+    <link rel="stylesheet" href="../style.css">
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <header class="lh-docs-header">
+  <a class="lh-docs-brand" href="/" aria-label="Lost Harbor documentation home">
+    <img src="/assets/logo-wordmark.svg" alt="Lost Harbor">
+  </a>
+  <span class="lh-docs-label">Documentation</span>
+  <nav aria-label="Documentation">
+    <a href="/player/" aria-label="Player guide"><span class="lh-nav-full">Player guide</span><span class="lh-nav-short" aria-hidden="true">Player</span></a>
+    <a href="/developer/" aria-current="page" aria-label="Developer guide"><span class="lh-nav-full">Developer guide</span><span class="lh-nav-short" aria-hidden="true">Developer</span></a>
+    <a href="/api/" aria-label="API docs"><span class="lh-nav-full">API docs</span><span class="lh-nav-short" aria-hidden="true">API</span></a>
+  </nav>
+</header>
+<main class="doc-content">
+
+
+    <h1 class="title">Developer guide</h1>
+    <p>Lost Harbor is Rust from end to end.
+One synchronous engine runs under two hosts.
+The native host uses WebSockets and SQLite.
+The browser host uses a Web Worker and IndexedDB.
+The Leptos client sends commands and renders engine messages.</p>
+<p>On this page:
+<a href="#local-setup">setup</a>,
+<a href="#crate-map">crates</a>,
+<a href="#add-a-feature">plugins</a>,
+<a href="#content-and-builder-tools">content</a>,
+<a href="#isolated-playtesting">playtesting</a>,
+<a href="#checks">checks</a>,
+<a href="#write-api-documentation">API writing</a>,
+<a href="#build-and-preview-this-site">site builds</a>,
+<a href="#deployment">deployment</a>.</p>
+<h2 id="local-setup"><a class="doc-anchor" href="#local-setup">§</a>Local setup</h2>
+<p>Clone the source repository with an account that has access.
+The source repository is private.
+This public documentation site does not grant source access.</p>
+<p>Install rustup, then let the root <code>rust-toolchain.toml</code> select the pinned toolchain.
+Install the matching browser build tool:</p>
+<div class="example-wrap"><pre class="language-sh"><code>cargo install wasm-pack --version 0.15.1 --locked
+cd game
+. &quot;$HOME/.cargo/env&quot;
+./build-web.sh
+./build-lab.sh --release
+cargo run -p lh_server -- --port 8090 --bind 127.0.0.1</code></pre></div>
+<p>Open <a href="http://127.0.0.1:8090/">http://127.0.0.1:8090/</a>.
+Add <code>?local=1</code> to run the browser engine.
+The native server saves to <code>game/data/dev.sqlite</code> by default.
+Browser mode uses IndexedDB on that origin.</p>
+<p>Use port 8090 or higher.
+The server accepts <code>--port</code>, <code>--bind</code>, <code>--web</code>, <code>--content</code>, <code>--db</code>, <code>--memory</code> and <code>--no-watch</code>.
+Content reloads from disk during native development.</p>
+<h2 id="crate-map"><a class="doc-anchor" href="#crate-map">§</a>Crate map</h2><div><table><thead><tr><th>Crate</th><th>Responsibility</th></tr></thead><tbody>
+<tr><td><code>lh_protocol</code></td><td>Tagged JSON messages, command requests and rendered views.</td></tr>
+<tr><td><code>lh_engine</code></td><td>ECS world, commands, rules, plugins and simulation.</td></tr>
+<tr><td><code>lh_content</code></td><td>RON models, embedded content, loaders and validation.</td></tr>
+<tr><td><code>lh_store</code></td><td>Persistence records, memory store and optional SQLite store.</td></tr>
+<tr><td><code>lh_server</code></td><td>Native HTTP, WebSocket, storage and content host.</td></tr>
+<tr><td><code>lh_worker</code></td><td>Browser engine host and IndexedDB persistence.</td></tr>
+<tr><td><code>lh_client</code></td><td>Leptos interface, transports and local browser state.</td></tr>
+<tr><td><code>lh_markup</code></td><td>Markup parsing and escaping.</td></tr>
+<tr><td><code>lh_map</code></td><td>Room-map layout.</td></tr>
+<tr><td><code>lh_space</code></td><td>Deterministic orbit, course and flight math.</td></tr>
+<tr><td><code>lh_portrait</code></td><td>Seeded portrait generation.</td></tr>
+<tr><td><code>lh_names</code></td><td>Markov chains, phrases and corpus descriptions.</td></tr>
+<tr><td><code>lh_lab</code></td><td>Standalone ship, portrait and name tools.</td></tr>
+</tbody></table>
+</div>
+<p><a href="../api/">Open the API reference</a>.
+Each crate’s module documentation explains its place in the system.</p>
+<h2 id="add-a-feature"><a class="doc-anchor" href="#add-a-feature">§</a>Add a feature</h2>
+<p>Engine features are plugins.
+A plugin registers its commands, components, systems, content kinds and views through <code>AppBuilder</code>.
+Use <code>Engine::builder().plugin(...)</code> for a custom engine.
+Register standard game features in <code>plugins::add_standard</code>.
+Do not make a new plugin depend on editing another plugin’s internals.</p>
+<p>The engine remains authoritative.
+Both hosts run the same rules.
+The client sends <code>ClientMsg</code> values and renders <code>ServerMsg</code> values.
+Messages use a JSON <code>t</code> tag.</p>
+<p>Every window action needs a typed command.
+Route window and typed builder operations through the same content API and validation.
+The source file <code>design/specs/COMMAND_PARITY.md</code> records those pairs.</p>
+<h2 id="content-and-builder-tools"><a class="doc-anchor" href="#content-and-builder-tools">§</a>Content and builder tools</h2>
+<p>World records live under <code>game/content/&lt;kind&gt;/&lt;id path&gt;.ron</code>.
+An id such as <code>spindle:bar</code> maps to a nested path such as <code>rooms/spindle/bar.ron</code>.
+Content files are the source of truth.</p>
+<p>In the game, <code>build</code> opens builder mode.
+<code>clist</code>, <code>cshow</code>, <code>cset</code>, <code>cadd</code>, <code>cdel</code>, <code>cnew</code> and <code>cdelete</code> operate on registered content kinds.
+Use <code>help building</code> and command-specific help for exact syntax.
+Native builder edits write to the selected content folder.
+Browser edits stay as IndexedDB overlays on embedded content.</p>
+<p>The labs are at <code>/lab/</code>, with <code>/lab/ships/</code>, <code>/lab/portraits/</code> and <code>/lab/names/</code>.
+Rebuild with <code>./build-lab.sh --release</code>.
+The labs share the game’s generator code.
+The name lab saves phrases only through an eligible loopback native server.
+Public static labs do not write source files.</p>
+<p>Name lists live under <code>game/data/names/</code>.
+From <code>game/</code>, <code>cargo run --release -p lh_content --bin import-names</code> builds the lab corpus pack.
+Read <code>game/data/names/README.md</code> and <code>SOURCES.md</code> before importing or distributing that data.</p>
+<h2 id="isolated-playtesting"><a class="doc-anchor" href="#isolated-playtesting">§</a>Isolated playtesting</h2>
+<p>Never let test builder edits write to checked-in content.
+Use a unique temporary folder and an in-memory database:</p>
+<div class="example-wrap"><pre class="language-sh"><code>test_root=$(mktemp -d /tmp/lost-harbor-test.XXXXXX)
+cp -R content &quot;$test_root/content&quot;
+cargo run -p lh_server -- --port 8091 --bind 127.0.0.1 \
+  --content &quot;$test_root/content&quot; --memory</code></pre></div>
+<p>The copied content isolates native builder changes.
+The labs and browser engine use embedded content, so they require a rebuild after source-content edits.
+Stop the test server when finished.
+Remove only the specific temporary folder you created.</p>
+<p>The showcase pilot starts at the helm with money and crew.
+Use it for ship tests.
+Use a fresh newcomer for opening tests.
+Browser saves and the native server database are separate.</p>
+<h2 id="checks"><a class="doc-anchor" href="#checks">§</a>Checks</h2>
+<p>Run from <code>game/</code>:</p>
+<div class="example-wrap"><pre class="language-sh"><code>cargo test --workspace --locked
+cargo clippy --workspace --all-targets --locked -- -D warnings
+cargo clippy -p lh_client --target wasm32-unknown-unknown --locked -- -D warnings
+cargo build -p lh_engine -p lh_worker --target wasm32-unknown-unknown --locked
+cargo clippy -p lh_lab --target wasm32-unknown-unknown --locked -- -D warnings
+python3 -m unittest discover -s tools -p &#39;test_*.py&#39; -v
+./build-docs.sh</code></pre></div>
+<p>The opening’s end-to-end typed-command test is:</p>
+<div class="example-wrap"><pre class="language-sh"><code>cargo test -p lh_engine --test walkthrough --locked</code></pre></div>
+<p>Check interface changes in a browser at 1920x960 and 1600x860.
+Hard-reload after rebuilding browser assets.
+There is no service worker.</p>
+<h2 id="write-api-documentation"><a class="doc-anchor" href="#write-api-documentation">§</a>Write API documentation</h2>
+<p>Use <code>//!</code> to explain a module and <code>///</code> to document an item.
+Describe behavior, inputs and results.
+Add error and panic sections when those outcomes apply.
+Use intra-doc links for related types and methods.
+Rustdoc verifies those links.
+For a type in another crate, include its kind and absolute path, as in
+<code>[`ShipView`](struct@::lh_protocol::ShipView)</code>.</p>
+<p>Every public library API needs documentation, including fields, variants and associated items.
+The docs build fails on missing documentation or rustdoc warnings.
+Keep examples accurate and run workspace doctests.
+Use short sentences and the repository’s plain-English writing rules.</p>
+<p>Library roots use <code>#![doc(html_no_source)]</code>.
+This stable attribute prevents source-code pages in the public API output.
+Do not enable private-item documentation for the published site.</p>
+<h2 id="build-and-preview-this-site"><a class="doc-anchor" href="#build-and-preview-this-site">§</a>Build and preview this site</h2>
+<p>From <code>game/</code>:</p>
+<div class="example-wrap"><pre class="language-sh"><code>./build-docs.sh
+python3 -m http.server 8092 --directory pages/docs --bind 127.0.0.1</code></pre></div>
+<p>Open <a href="http://127.0.0.1:8092/">http://127.0.0.1:8092/</a>.
+The build renders Markdown guides through rustdoc and generates all public library APIs.
+It documents workspace dependencies first so cross-crate links resolve reliably.
+It then builds the whole workspace to keep its shared feature selection.
+It checks page links and required crate pages, then packages <code>game/pages/docs/</code>.
+It also checks browser APIs on the wasm target.
+Generated output stays out of git.</p>
+<p>The packager normalizes known upstream links from rustdoc, Leptos prop docs and tracing’s inherited trait docs.
+Its tests cover those repairs.
+Unknown broken links still fail the build.
+Rustdoc redirects retain method anchors during link validation.</p>
+<p>Guide sources are in <code>game/docs/</code>.
+The guides and API use the lab’s dark surfaces, the wordmark’s orange accent and shared navigation.
+The API starts dark but keeps rustdoc’s theme settings.
+Edit <code>style.css</code> for guides, <code>api-theme.css</code> for the API, and <code>header.css</code> for their shared header.
+The build and package tools are <code>game/build-docs.sh</code> and <code>game/tools/package_docs.py</code>.
+Update guides when commands, content or development steps change.
+Do not publish future design plans as current behavior.</p>
+<h2 id="deployment"><a class="doc-anchor" href="#deployment">§</a>Deployment</h2><div><table><thead><tr><th>Source event</th><th>Destination</th></tr></thead><tbody>
+<tr><td>Validated push to <code>main</code></td><td>Development game and this documentation site.</td></tr>
+<tr><td>Published stable release</td><td>Production game.</td></tr>
+<tr><td>Pull request to <code>main</code></td><td>Checks and downloadable artifacts only.</td></tr>
+</tbody></table>
+</div>
+<p>The documentation destination is <code>lost-harbor/docs.lost-harbor.space</code>.
+Pages serves its <code>main</code> branch root at <a href="https://docs.lost-harbor.space/">https://docs.lost-harbor.space/</a>.
+The source workflow uses <code>DOCS_PAGES_DEPLOY_KEY</code>, scoped to that hosting repository.
+Pull-request builds receive no deployment key.</p>
+<p>Deployment preserves the destination’s <code>CNAME</code> and <code>LICENSE.md</code>.
+It replaces obsolete generated files without rewriting git history.
+An outdated source revision does not replace newer <code>main</code> documentation.
+<code>deployment.json</code> identifies the deployed source commit.</p>
+<p>Repository permissions, DNS and HTTPS configuration are separate from a successful local build.
+Read the source repository’s <code>game/README.md</code> for hosting setup and first-rollout steps.</p>
+
+    </main>
+
+
+</body>
+</html>

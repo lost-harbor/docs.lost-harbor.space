@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["BUNDLE_FORMAT","BUNDLE_VERSION"],"fn":["zone_group"],"struct":["BuildingFrom","BuildingPlugin"]};

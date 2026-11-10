@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Plan"],"fn":["attack_roll","conditions","gear_lines","npc_line","score_lines","stun_for_ms","view"],"struct":["Active","AttackRoll","CombatPlugin","Combatant","Cooldowns","Corpse","Effects","Fighting","Foes","HazardClock","Queued","RoundClock","Vigor","Wimpy"]};

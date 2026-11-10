@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["draft_portrait","new_doc","validate_draft"],"struct":["AccountPlugin","UserDoc","Users"]};

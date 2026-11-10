@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Phrases: templates that join chains, literals and other phrases."><title>lh_names::phrase - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-0c87338a.css"><script id="default-settings" 
+data-use_system_theme="false"
+data-theme="dark"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="lh_names" data-themes="" data-resource-suffix="" data-rustdoc-version="1.99.1 (58cf8f9c3 2026-10-13)" data-channel="1.99.1" data-search-js="search-cf4fc35e.js" data-stringdex-js="stringdex-b5109af9.js" data-settings-js="settings-170eb4bf.js" ><script src="../../static.files/storage-41dd4d93.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../static.files/main-417ebf0a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-9f56287d.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc mod"><a class="skip-main-content" href="#main-content">Skip to main content</a><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><header class="lh-docs-header">
+  <a class="lh-docs-brand" href="/" aria-label="Lost Harbor documentation home">
+    <img src="/assets/logo-wordmark.svg" alt="Lost Harbor">
+  </a>
+  <span class="lh-docs-label">Documentation</span>
+  <nav aria-label="Documentation">
+    <a href="/player/" aria-label="Player guide"><span class="lh-nav-full">Player guide</span><span class="lh-nav-short" aria-hidden="true">Player</span></a>
+    <a href="/developer/" aria-label="Developer guide"><span class="lh-nav-full">Developer guide</span><span class="lh-nav-short" aria-hidden="true">Developer</span></a>
+    <a href="/api/" aria-current="page" aria-label="API docs"><span class="lh-nav-full">API docs</span><span class="lh-nav-short" aria-hidden="true">API</span></a>
+  </nav>
+</header>
+
+<rustdoc-topbar><h2><a href="#">Module phrase</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../lh_names/index.html">lh_<wbr>names</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module phrase</a></h2><h3><a href="#structs">Module Items</a></h3><ul class="block"><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#enums" title="Enums">Enums</a></li><li><a href="#constants" title="Constants">Constants</a></li><li><a href="#functions" title="Functions">Functions</a></li></ul></section><div id="rustdoc-modnav"><h2 class="in-crate"><a href="../index.html">In crate lh_<wbr>names</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content" tabindex="-1"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../index.html">lh_names</a></div><h1>Module <span>phrase</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Phrases: templates that join chains, literals and other phrases.</p>
+<p>A chain (a <a href="../struct.Style.html" title="struct lh_names::Style"><code>Style</code></a>) writes one kind of word, such as a given name. A
+<a href="struct.Phrase.html" title="struct lh_names::phrase::Phrase"><code>Phrase</code></a> writes a whole line from one or more patterns. A pattern is
+plain text with slots in angle brackets:</p>
+<div><table><thead><tr><th>Slot</th><th>Writes</th></tr></thead><tbody>
+<tr><td><code>&lt;chain:human:first&gt;</code></td><td>a name from the chain or phrase with that id</td></tr>
+<tr><td><code>&lt;chain.human.first&gt;</code></td><td>the same: a dot reads as a colon</td></tr>
+<tr><td><code>&lt;human:full|thren:full&gt;</code></td><td>one of the choices, picked evenly</td></tr>
+<tr><td><code>&lt;'the '|''&gt;</code></td><td>a quoted literal, here <code>the </code> or nothing</td></tr>
+<tr><td><code>&lt;#&gt;</code></td><td>one digit</td></tr>
+<tr><td><code>&lt;@&gt;</code></td><td>one capital letter</td></tr>
+<tr><td><code>&lt;&lt;</code></td><td>a plain <code>&lt;</code></td></tr>
+</tbody></table>
+</div>
+<p>A <code>&gt;</code> outside a slot is plain text, so markup such as
+<code>{grad:teal&gt;blue}</code> passes through.</p>
+<p>So <code>&lt;chain:human:first&gt; &lt;chain:human:last&gt;</code> writes a full name, and
+<code>&lt;chain:house:name&gt; &lt;@&gt;&lt;#&gt;&lt;#&gt;</code> writes a gun model such as <code>Brasker K40</code>.</p>
+<p>Braces are not used, because the text markup in <code>lh_markup</code> already
+uses <code>{red}</code> and <code>{{</code>.</p>
+<p>A phrase with many patterns picks one at random each time, in
+proportion to the pattern weights (see <a href="../weighted/index.html" title="mod lh_names::weighted"><code>crate::weighted</code></a>). A pattern
+with weight 3 is picked three times as often as one with weight 1.</p>
+<p>A <a href="struct.Library.html" title="struct lh_names::phrase::Library"><code>Library</code></a> holds every chain and phrase and runs templates. It also
+makes distilled chains (see <a href="../struct.Distill.html" title="struct lh_names::Distill"><code>crate::Distill</code></a>): it runs the recipe’s
+template, then trains a chain on what it wrote.</p>
+<p>Patterns: interpreter, since <a href="fn.parse.html" title="fn lh_names::phrase::parse"><code>parse</code></a> turns a template into pieces
+that <a href="struct.Library.html" title="struct lh_names::phrase::Library"><code>Library</code></a> then runs. Composite, since a phrase can hold other
+phrases. Memoization, since the library builds each chain once.</p>
+</div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.Library.html" title="struct lh_names::phrase::Library">Library</a></dt><dd>Every chain and phrase, ready to run templates.</dd><dt><a class="struct" href="struct.Phrase.html" title="struct lh_names::phrase::Phrase">Phrase</a></dt><dd>A named set of patterns, one content record of kind <code>phrase</code>.</dd></dl><h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2><dl class="item-table"><dt><a class="enum" href="enum.Choice.html" title="enum lh_names::phrase::Choice">Choice</a></dt><dd>One choice inside a slot.</dd><dt><a class="enum" href="enum.Kind.html" title="enum lh_names::phrase::Kind">Kind</a></dt><dd>What an id names in a library.</dd><dt><a class="enum" href="enum.Piece.html" title="enum lh_names::phrase::Piece">Piece</a></dt><dd>One piece of a parsed template.</dd></dl><h2 id="constants" class="section-header">Constants<a href="#constants" class="anchor">§</a></h2><dl class="item-table"><dt><a class="constant" href="constant.MAX_DEPTH.html" title="constant lh_names::phrase::MAX_DEPTH">MAX_<wbr>DEPTH</a></dt><dd>How deep phrases nest inside phrases before the library stops. A deeper
+nest is almost surely a loop.</dd></dl><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><dl class="item-table"><dt><a class="fn" href="fn.missing.html" title="fn lh_names::phrase::missing">missing</a></dt><dd>Missing ids reached through phrases and distilled chain recipes.</dd><dt><a class="fn" href="fn.parse.html" title="fn lh_names::phrase::parse">parse</a></dt><dd>Splits a template into pieces, or says what is wrong with it.</dd><dt><a class="fn" href="fn.refs.html" title="fn lh_names::phrase::refs">refs</a></dt><dd>Every id a template names, in order, without repeats.</dd></dl></section></div></main></body></html>

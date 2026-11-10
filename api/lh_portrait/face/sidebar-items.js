@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["SKIN"],"enum":["Build","Clothes","Facial","Family","Hair","Headgear","Mark","Pose"],"struct":["Face"]};

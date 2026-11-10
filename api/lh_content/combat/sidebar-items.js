@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["CONDITIONS"],"enum":["AbilityTarget","Aggression","Effect","Stat"],"fn":["npc_xp"],"struct":["Ability","CombatRules","Consumable","Dice","Hazard","Inflict","Loot","NpcAttack","NpcCombat","Save","Weapon"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["clock_at","copy_key","copy_of","live_at","owner_key"],"struct":["Instances","LiveCopy"]};

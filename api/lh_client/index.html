@@ -1,0 +1,35 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Lost Harbor web client."><title>lh_client - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-0c87338a.css"><script id="default-settings" 
+data-use_system_theme="false"
+data-theme="dark"></script><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="lh_client" data-themes="" data-resource-suffix="" data-rustdoc-version="1.99.1 (58cf8f9c3 2026-10-13)" data-channel="1.99.1" data-search-js="search-cf4fc35e.js" data-stringdex-js="stringdex-b5109af9.js" data-settings-js="settings-170eb4bf.js" ><script src="../static.files/storage-41dd4d93.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-417ebf0a.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-9f56287d.css"></noscript><link rel="stylesheet" href="../theme.css"><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><a class="skip-main-content" href="#main-content">Skip to main content</a><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><header class="lh-docs-header">
+  <a class="lh-docs-brand" href="/" aria-label="Lost Harbor documentation home">
+    <img src="/assets/logo-wordmark.svg" alt="Lost Harbor">
+  </a>
+  <span class="lh-docs-label">Documentation</span>
+  <nav aria-label="Documentation">
+    <a href="/player/" aria-label="Player guide"><span class="lh-nav-full">Player guide</span><span class="lh-nav-short" aria-hidden="true">Player</span></a>
+    <a href="/developer/" aria-label="Developer guide"><span class="lh-nav-full">Developer guide</span><span class="lh-nav-short" aria-hidden="true">Developer</span></a>
+    <a href="/api/" aria-current="page" aria-label="API docs"><span class="lh-nav-full">API docs</span><span class="lh-nav-short" aria-hidden="true">API</span></a>
+  </nav>
+</header>
+
+<rustdoc-topbar><h2><a href="#">Crate lh_client</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../lh_client/index.html">lh_<wbr>client</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#modules">Crate Items</a></h3><ul class="block"><li><a href="#modules" title="Modules">Modules</a></li><li><a href="#functions" title="Functions">Functions</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content" tabindex="-1"><div class="main-heading"><h1>Crate <span>lh_<wbr>client</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Lost Harbor web client.</p>
+<p>This crate compiles to WebAssembly and runs in the browser. It uses Leptos,
+a Rust UI library that renders in client-side mode (CSR). The client
+talks to the game with messages defined in <code>lh_protocol</code>. It reaches the
+game through either a WebSocket (native server) or a Web Worker (in-browser
+single player). See <code>net</code> for the transport and <code>state</code> for how messages
+update the UI.</p>
+</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><dl class="item-table"><dt><a class="mod" href="builder/index.html" title="mod lh_client::builder">builder</a></dt><dd>The building tools state: the content cache, the drafts, and the problems.
+The building tools state: the content browser data and the open records.</dd><dt><a class="mod" href="mk/index.html" title="mod lh_client::mk">mk</a></dt><dd>Inline markup renderer for game text, such as colour codes and links.
+Renders <code>lh_markup</code> text into styled spans.</dd><dt><a class="mod" href="net/index.html" title="mod lh_client::net">net</a></dt><dd>Transport layer: connects to the server over a WebSocket or a Worker.
+Transports. The transport layer moves messages between the UI and the game.</dd><dt><a class="mod" href="state/index.html" title="mod lh_client::state">state</a></dt><dd>Client state: signals that hold everything the UI shows.
+Client state: one <code>App</code> of signals, updated by <code>handle(ServerMsg)</code>.</dd><dt><a class="mod" href="store/index.html" title="mod lh_client::store">store</a></dt><dd>Browser <code>localStorage</code> helpers for saved settings.
+Small localStorage / sessionStorage helpers. All failures are ignored:
+private browsing or disabled storage just means nothing persists.</dd><dt><a class="mod" href="tip/index.html" title="mod lh_client::tip">tip</a></dt><dd>Tooltip engine that shows hover text for game terms.
+Tooltip engine: any element with <code>data-tip</code> / <code>data-tip-title</code> gets a
+styled, viewport-clamped tooltip on hover and keyboard focus. Lines in
+<code>data-tip</code> are separated by <code>|</code>. A line starting with <code>›</code> is a command.</dd><dt><a class="mod" href="ui/index.html" title="mod lh_client::ui">ui</a></dt><dd>The Leptos components that make up the screen.
+UI components. Layout principle: the header is the character and player.
+The ribbon and left column (one L-shaped panel) are the physical world. The
+right column is the social world. The transcript sits inside the L.</dd></dl><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><dl class="item-table"><dt><a class="fn" href="fn.start.html" title="fn lh_client::start">start</a></dt><dd>Entry point. <code>wasm_bindgen(start)</code> runs this when the WebAssembly module loads.
+It mounts the <code>Root</code> component into the page <code>&lt;body&gt;</code>.</dd></dl></section></div></main></body></html>

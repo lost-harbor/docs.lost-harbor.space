@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Stage"],"struct":["AppBuilder","CommandSpec","ContentKindSpec","PersistSection","Presence","RecordKind","Reg","Registries","ViewSpec"],"trait":["Plugin"],"type":["CommandFn","ContactFn","ExitProviderFn","FallbackFn","LookFn","MarkerFn","MessageFn","MoverFn","PresenceFn","ResolveFn","StartupFn","VerbFn","ViewFn"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["ROUTES"],"fn":["LabBar","start"],"mod":["names","portraits","random_layout","ships"],"struct":["LabBarProps"]};

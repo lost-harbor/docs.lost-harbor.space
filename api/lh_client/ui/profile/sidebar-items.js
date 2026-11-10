@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["S"],"enum":["Part"],"fn":["HullProfile","front","parts_view","profile","profile_from_geometry"],"struct":["HullProfileProps","Profile"]};

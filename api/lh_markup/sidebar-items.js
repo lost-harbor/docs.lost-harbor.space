@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["EntityRef","Hue","Link"],"fn":["escape","parse","sanitize_player","strip","validate"],"struct":["Allow","Color","Gradient","Span","Style"]};

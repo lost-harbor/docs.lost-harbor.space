@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["DRAIN","EFFECT_SECS","HULL_FLOOR","REPAIR_PRICE","WEAR"],"fn":["fields_at","filter_contacts","hidden","nebula_at","register","scan_block","tick","viewer_point"],"struct":["Exposure"]};

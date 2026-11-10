@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["item_view","match_items"],"struct":["ItemsPlugin"]};

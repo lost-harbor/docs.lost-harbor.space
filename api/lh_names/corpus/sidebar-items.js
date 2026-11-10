@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["INDEX"],"enum":["Facet"],"fn":["entry","group_name","list_name","path","section","style"],"struct":["Entry","Index"]};

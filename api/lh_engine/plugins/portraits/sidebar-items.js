@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["CLINIC","CLINIC_PRICE","FILED","FREE_CHANGE"],"struct":["PortraitsPlugin"]};

@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Combat: real-time rounds, abilities, conditions, death, hazards and loot. The `combat` plugin: CircleMUD-style real-time fights with 5e resolution."><title>lh_engine::plugins::combat - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-0c87338a.css"><script id="default-settings" 
+data-use_system_theme="false"
+data-theme="dark"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="lh_engine" data-themes="" data-resource-suffix="" data-rustdoc-version="1.99.1 (58cf8f9c3 2026-10-13)" data-channel="1.99.1" data-search-js="search-cf4fc35e.js" data-stringdex-js="stringdex-b5109af9.js" data-settings-js="settings-170eb4bf.js" ><script src="../../../static.files/storage-41dd4d93.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-417ebf0a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-9f56287d.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"></head><body class="rustdoc mod"><a class="skip-main-content" href="#main-content">Skip to main content</a><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><header class="lh-docs-header">
+  <a class="lh-docs-brand" href="/" aria-label="Lost Harbor documentation home">
+    <img src="/assets/logo-wordmark.svg" alt="Lost Harbor">
+  </a>
+  <span class="lh-docs-label">Documentation</span>
+  <nav aria-label="Documentation">
+    <a href="/player/" aria-label="Player guide"><span class="lh-nav-full">Player guide</span><span class="lh-nav-short" aria-hidden="true">Player</span></a>
+    <a href="/developer/" aria-label="Developer guide"><span class="lh-nav-full">Developer guide</span><span class="lh-nav-short" aria-hidden="true">Developer</span></a>
+    <a href="/api/" aria-current="page" aria-label="API docs"><span class="lh-nav-full">API docs</span><span class="lh-nav-short" aria-hidden="true">API</span></a>
+  </nav>
+</header>
+
+<rustdoc-topbar><h2><a href="#">Module combat</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../lh_engine/index.html">lh_<wbr>engine</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module combat</a></h2><h3><a href="#structs">Module Items</a></h3><ul class="block"><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#enums" title="Enums">Enums</a></li><li><a href="#functions" title="Functions">Functions</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="../index.html">In lh_<wbr>engine::<wbr>plugins</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content" tabindex="-1"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">lh_engine</a>::<wbr><a href="../index.html">plugins</a></div><h1>Module <span>combat</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Combat: real-time rounds, abilities, conditions, death, hazards and loot.
+The <code>combat</code> plugin: CircleMUD-style real-time fights with 5e resolution.</p>
+<p>A fight starts with <code>kill</code>, <code>attack</code>, or <code>hit</code>. Every few seconds a combat
+round runs, and each fighter attacks its foe: d20 plus an attack bonus
+against the foe’s armour class. A player can queue one action per round,
+such as <code>use &lt;ability&gt;</code>, <code>shoot</code>, <code>aim</code>, <code>dodge</code>, <code>disengage</code>, or <code>flee</code>.</p>
+<p>Files:</p>
+<ul>
+<li><code>mod.rs</code>: the plugin, the components, and shared helpers.</li>
+<li><code>rolls.rs</code>: attack rolls, damage, saving throws, and healing.</li>
+<li><code>effects.rs</code>: conditions, abilities, consumables, and the effect list.</li>
+<li><code>round.rs</code>: the round system, NPC tactics, fleeing, and recovery.</li>
+<li><code>death.rs</code>: death, corpses, respawns, XP, and loot.</li>
+<li><code>commands.rs</code>: the typed commands and the mover.</li>
+<li><code>views.rs</code>: the vitals readout, <code>score</code>, <code>consider</code>, and room lines.</li>
+<li><code>hazards.rs</code>: room hazards and behavior actions that hurt or heal.</li>
+<li><code>remains.rs</code>: the record that keeps player corpses through a restart.</li>
+</ul>
+<p>This plugin registers:</p>
+<ul>
+<li>Content kind: <code>ability</code>.</li>
+<li>Commands: <code>kill</code> (aliases <code>attack</code>, <code>hit</code>), <code>shoot</code>, <code>aim</code>, <code>dodge</code>,
+<code>disengage</code>, <code>flee</code>, <code>use</code> (abilities and consumables), <code>wimpy</code>,
+<code>consider</code> (alias <code>con</code>), <code>affects</code> (alias <code>aff</code>), <code>assist</code>,
+<code>abilities</code> (alias <code>powers</code>), and <code>loot</code>. A hidden <code>get</code> handler takes
+items out of corpses. Hidden <code>rest</code> and <code>sleep</code> handlers refuse during
+a fight.</li>
+<li>Mover: <code>hold_in_fight</code>, which stops a fighter from walking away.</li>
+<li>Presence, verbs, and a looker for corpses and fightable NPCs.</li>
+<li>Observers: <code>Arrived</code> (aggressive NPCs and hazard warnings), <code>Slept</code>
+(a long rest clears conditions), <code>GainXp</code> (new abilities), and
+<code>CombatAction</code> (behavior actions).</li>
+<li>System: <code>tick</code>, which runs rounds, hazards, and corpse decay.</li>
+<li>Persistence: <code>wimpy</code>.</li>
+<li>Records: kind <code>corpse</code>, one record that holds every player corpse.</li>
+</ul>
+<p>Independence: fights in other rooms never meet, because every check
+compares the full room id, and a room in an instance copy carries its
+owner suffix. Other plugins call a few public hooks here: <code>view</code>,
+<code>conditions</code>, <code>score_lines</code>, <code>gear_lines</code>, <code>npc_line</code>, and <code>stun_for_ms</code>.</p>
+</div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.Active.html" title="struct lh_engine::plugins::combat::Active">Active</a></dt><dd>One active condition or stat change, with the rounds it has left.</dd><dt><a class="struct" href="struct.AttackRoll.html" title="struct lh_engine::plugins::combat::AttackRoll">Attack<wbr>Roll</a></dt><dd>The result of one attack roll.</dd><dt><a class="struct" href="struct.CombatPlugin.html" title="struct lh_engine::plugins::combat::CombatPlugin">Combat<wbr>Plugin</a></dt><dd>Adds combat to the app.</dd><dt><a class="struct" href="struct.Combatant.html" title="struct lh_engine::plugins::combat::Combatant">Combatant</a></dt><dd>A fighter that is not a content NPC, such as a hired crew member. The
+plugin that spawns it fills in the stats. Combat then treats it like an
+NPC: it takes NPC turns, uses <code>stats</code> for its attacks and armour, and
+keeps its hit points in <code>Vigor</code>.</dd><dt><a class="struct" href="struct.Cooldowns.html" title="struct lh_engine::plugins::combat::Cooldowns">Cooldowns</a></dt><dd>Ability cooldowns: ability id to rounds left.</dd><dt><a class="struct" href="struct.Corpse.html" title="struct lh_engine::plugins::combat::Corpse">Corpse</a></dt><dd>A corpse in a room. Its contents are items carried by the corpse entity.</dd><dt><a class="struct" href="struct.Effects.html" title="struct lh_engine::plugins::combat::Effects">Effects</a></dt><dd>Every active condition on a fighter.</dd><dt><a class="struct" href="struct.Fighting.html" title="struct lh_engine::plugins::combat::Fighting">Fighting</a></dt><dd>The foe that a fighter attacks each round. Both players and NPCs carry it.</dd><dt><a class="struct" href="struct.Foes.html" title="struct lh_engine::plugins::combat::Foes">Foes</a></dt><dd>The characters who fought an NPC. They share its XP when it dies.</dd><dt><a class="struct" href="struct.HazardClock.html" title="struct lh_engine::plugins::combat::HazardClock">Hazard<wbr>Clock</a></dt><dd>When each character in a hazard room takes the next hit.</dd><dt><a class="struct" href="struct.Queued.html" title="struct lh_engine::plugins::combat::Queued">Queued</a></dt><dd>The action queued for the player’s next turn.</dd><dt><a class="struct" href="struct.RoundClock.html" title="struct lh_engine::plugins::combat::RoundClock">Round<wbr>Clock</a></dt><dd>When the next combat round runs, and how many have run.</dd><dt><a class="struct" href="struct.Vigor.html" title="struct lh_engine::plugins::combat::Vigor">Vigor</a></dt><dd>An NPC’s hit points. Players keep theirs in <code>Stats</code>. The plugin adds it
+the first time an NPC with combat stats takes part in a fight.</dd><dt><a class="struct" href="struct.Wimpy.html" title="struct lh_engine::plugins::combat::Wimpy">Wimpy</a></dt><dd>The player flees at once when their hit points fall below this.</dd></dl><h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2><dl class="item-table"><dt><a class="enum" href="enum.Plan.html" title="enum lh_engine::plugins::combat::Plan">Plan</a></dt><dd>What a player does on their next turn instead of a plain attack.</dd></dl><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><dl class="item-table"><dt><a class="fn" href="fn.attack_roll.html" title="fn lh_engine::plugins::combat::attack_roll">attack_<wbr>roll</a></dt><dd>Resolves one attack roll from two d20 results. The second die counts only
+with advantage or disadvantage. A pure function, so tests can check it.</dd><dt><a class="fn" href="fn.conditions.html" title="fn lh_engine::plugins::combat::conditions">conditions</a></dt><dd>The condition list for a fighter, as the protocol shows it.</dd><dt><a class="fn" href="fn.gear_lines.html" title="fn lh_engine::plugins::combat::gear_lines">gear_<wbr>lines</a></dt><dd>Extra lines for <code>equipment</code>: the attack and armour class the gear gives.</dd><dt><a class="fn" href="fn.npc_line.html" title="fn lh_engine::plugins::combat::npc_line">npc_<wbr>line</a></dt><dd>The room line of an NPC in a fight, which replaces its usual line. The
+text follows the NPC’s name, for example “is here, fighting Ash!”.</dd><dt><a class="fn" href="fn.score_lines.html" title="fn lh_engine::plugins::combat::score_lines">score_<wbr>lines</a></dt><dd>Extra lines for <code>score</code>: armour class, attack, wimpy, and the fight.</dd><dt><a class="fn" href="fn.stun_for_ms.html" title="fn lh_engine::plugins::combat::stun_for_ms">stun_<wbr>for_<wbr>ms</a></dt><dd>Applies the <code>stunned</code> condition for about <code>ms</code> milliseconds, and at least
+one round. Exit guards call it, so their stun is a real condition.</dd><dt><a class="fn" href="fn.view.html" title="fn lh_engine::plugins::combat::view">view</a></dt><dd>The combat part of the vitals view for a player. The round number only
+counts during a fight, so the view stays still while nothing happens.</dd></dl></section></div></main></body></html>

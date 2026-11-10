@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["ShipSheet","arrange","drawn_defs","fresh_id","tone","tones"],"struct":["Arrangement","Frame","ShipSheetProps","Tones"]};

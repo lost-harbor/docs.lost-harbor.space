@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["MAX_REACH","NOSES","TAILS"],"enum":["Join"],"fn":["core_limit","joins","noses","shape","tails"],"struct":["EndPart","KitInput","Ring","Shell"]};
