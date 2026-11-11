@@ -109,7 +109,10 @@ The <a href="opening.html">walkthrough</a> explains the opening’s recovery rou
 <p>A suit protects against the opening’s vacuum.
 Wear it before crossing the outer surface.</p>
 <h2 id="your-first-ship"><a class="doc-anchor" href="#your-first-ship">§</a>Your first ship</h2>
-<p>At the helm, type <code>pilot</code> to enter piloting mode.
+<p>At a Pilot-enabled control item, type <code>pilot</code> or <code>use helm</code>.
+The helm is a physical item, not a privilege granted by the cockpit.
+It mounts you automatically. Use <code>leave controls</code> or <code>leave helm</code> before walking.
+Leaving controls does not stop a course.
 Type <code>ship</code> for status and <code>window ship</code> for the ship window.
 The opening’s lifeboat requires repairs before launch.</p>
 <div class="example-wrap"><pre class="language-text"><code>pilot
@@ -128,6 +131,29 @@ Watch the chart and read the transcript for progress and failures.</p>
 At a shipyard, <code>shipyard</code> lists offers.
 Use <code>help &lt;command&gt;</code> before buying, selling or ordering crew.
 Fuel, location, ownership and available berths constrain ship actions.</p>
+<h2 id="control-items-and-maps"><a class="doc-anchor" href="#control-items-and-maps">§</a>Control items and maps</h2>
+<p><code>use sensors</code> operates the standing sensor panel. Walking away releases it.
+Small craft fly, refuel, repair and mine from one couch. Larger ships spread the work:
+the helm flies, the engineering console refuels and repairs, a mining console or
+survey station mines, and a carrier’s recovery consoles launch and recover craft.
+When a room has several identical stations, name one: <code>use 2.turret</code>.
+An unsuccessful move keeps the controls active.
+Ordinary mountable seats use <code>mount &lt;item&gt;</code> or <code>sit &lt;item&gt;</code>, then <code>leave mount</code>.
+Each physical item has its own user capacity. Several pilots can control one ship.</p>
+<p>Builders select any combination of Navigation Maps, Deck Plan, Sensors, Comms,
+Pilot, Refueling, Repairs, Mining and Fleet.
+Groups have no prerequisites. Navigation Maps grants charts, not flight.
+Refueling and hull repairs require their groups, even when typed.
+Fleet grants carrier recover and launch actions, not ownership-list access.</p>
+<p>Navigation Maps adds System and Galaxy tabs. Deck Plan adds Deck independently.
+The galaxy shows all ten authored systems and their gate connections.
+They form a small sector, about one fifth of the galaxy’s width.
+The Verge sits about half way out from the core, near where Sol would be.
+The bright core is a supermassive black hole.
+Opening fits the core and current system. Drag to pan and scroll to zoom.
+Select a system for its bodies, neighbors, distance in galactic units and a read-only chart.
+Remote charts show bodies, orbits and gate destinations, never live contacts or ship actions.
+Galactic distances do not change fuel costs yet.</p>
 <h2 id="browser-controls"><a class="doc-anchor" href="#browser-controls">§</a>Browser controls</h2>
 <p>Some commands change only the browser interface.
 Engine <code>help</code> does not list these local commands.</p>
@@ -136,7 +162,14 @@ Engine <code>help</code> does not list these local commands.</p>
 <tr><td><code>window inventory</code></td><td>Open inventory.</td></tr>
 <tr><td><code>window chart</code></td><td>Open the system chart.</td></tr>
 <tr><td><code>window settings</code></td><td>Open settings.</td></tr>
-<tr><td><code>map deck</code>, <code>map system</code></td><td>Choose the map card’s view.</td></tr>
+<tr><td><code>map deck</code>, <code>map system</code>, <code>map galaxy</code></td><td>Choose an enabled control-map tab.</td></tr>
+<tr><td><code>window galaxy</code>, <code>window deck</code></td><td>Expand an enabled map.</td></tr>
+<tr><td><code>galaxy fit</code>, <code>galaxy fit all</code>, <code>galaxy fit galaxy</code></td><td>Fit core/current, authored systems, or the full galaxy.</td></tr>
+<tr><td><code>galaxy center current</code>, <code>galaxy center core</code></td><td>Center the map.</td></tr>
+<tr><td><code>galaxy zoom in</code>, <code>galaxy zoom out</code>, <code>galaxy pan &lt;x&gt; &lt;y&gt;</code></td><td>Zoom or pan in galactic units.</td></tr>
+<tr><td><code>galaxy select &lt;id&gt;</code></td><td>Select a system.</td></tr>
+<tr><td><code>chart system &lt;id&gt;</code></td><td>Open its read-only remote chart.</td></tr>
+<tr><td><code>chart remote fit</code>, <code>chart remote zoom in</code>, <code>chart remote zoom out</code></td><td>Adjust only the remote chart.</td></tr>
 <tr><td><code>chart fit</code></td><td>Fit the chart to its contents.</td></tr>
 <tr><td><code>filter all</code></td><td>Show all transcript categories.</td></tr>
 <tr><td><code>clear</code></td><td>Clear the visible transcript.</td></tr>

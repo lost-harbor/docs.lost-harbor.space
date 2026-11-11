@@ -101,6 +101,45 @@ The source file <code>design/specs/COMMAND_PARITY.md</code> records those pairs.
 <p>World records live under <code>game/content/&lt;kind&gt;/&lt;id path&gt;.ron</code>.
 An id such as <code>spindle:bar</code> maps to a nested path such as <code>rooms/spindle/bar.ron</code>.
 Content files are the source of truth.</p>
+<h3 id="physical-controls-and-galaxy-placement"><a class="doc-anchor" href="#physical-controls-and-galaxy-placement">§</a>Physical controls and galaxy placement</h3>
+<p>Items independently define <code>mountable</code>, <code>unlisted</code>, and positive <code>user_capacity</code>
+(default 1). <code>fixed</code> prevents pickup. <code>unlisted</code> suppresses room listings and every
+pickup selector, but preserves named interactions and existing discovery rules.
+Mounts and control items cannot stack.</p>
+<p><code>controls: (label: "Sensor Mode", groups: ["navigation", "sensors"])</code> enables the
+Control System feature. Feature plugins register group labels and shortcuts with
+<code>AppBuilder::control_group</code>. <code>content_check</code> adds registry-aware validation to
+the shared builder path without changing another feature’s code.
+<code>control_verbs</code> registers feature-owned permission rules for chart entity menus.
+The controls plugin validates group ids. Group checks authorize typed commands
+and chart verbs. Do not infer permissions from room names or client layout.
+Ships use the shared station items in <code>items/general</code>. Small craft carry one
+<code>general:helm</code> couch with every group except Fleet. Crewed ships put
+<code>general:bridge-helm</code> in the cockpit, with flight and charts only, and spread the
+other work across rooms: <code>engineering-console</code> (Refueling, Repairs),
+<code>mining-console</code>, <code>survey-station</code>, <code>recovery-console</code> (Fleet), <code>turret-seat</code>,
+<code>copilot-seat</code>, <code>sensor-panel</code> and <code>chart-table</code>. The controls tests exercise
+representative consoles and independent groups in the holodeck. They do not
+check the equipment on authored ships. The engine never guesses between
+identical copies in one room. The failure lists their ordinals, such as <code>1.recovery</code>.
+<code>UsingItem</code> addresses a runtime entity. Persistence restores its room copy and
+checks placement, features and capacity again.</p>
+<p>System records define <code>galaxy_position: (x, y)</code> in static galactic units and
+<code>representatives: ["star-id"]</code> using their own place ids.
+The System editor provides coordinates, representative selection and a shared
+SVG placement preview. <code>sysedit &lt;system&gt; galaxy &lt;x&gt; &lt;y&gt;</code> uses the same save path.
+The first added place starts as the representative and remains editable.
+Removing the last representative requires selecting another before saving.
+The core stays at <code>(0, 0)</code>. Gate content supplies links and direction.
+The projection boundary currently includes every system. Future discovery
+filtering belongs there. Galaxy distances are distinct from orbital units.
+The client renders the full galaxy as deterministic inline SVG: a painted,
+face-on barred spiral without SVG filters, and an animated black-hole core drawn
+in screen space. The galaxy radius is 9000 units. The authored sector spans about
+one fifth of the diameter. The Verge sits at <code>(3300, -3300)</code>, about half way
+out, where Sol sits in the Milky Way.</p>
+<p>Remote charts use separate client system and clock signals. They contain no
+contacts, local ship state or actionable verbs.</p>
 <p>In the game, <code>build</code> opens builder mode.
 <code>clist</code>, <code>cshow</code>, <code>cset</code>, <code>cadd</code>, <code>cdel</code>, <code>cnew</code> and <code>cdelete</code> operate on registered content kinds.
 Use <code>help building</code> and command-specific help for exact syntax.
@@ -125,10 +164,35 @@ cargo run -p lh_server -- --port 8091 --bind 127.0.0.1 \
 The labs and browser engine use embedded content, so they require a rebuild after source-content edits.
 Stop the test server when finished.
 Remove only the specific temporary folder you created.</p>
-<p>The showcase pilot starts at the helm with money and crew.
-Use it for ship tests.
-Use a fresh newcomer for opening tests.
+<p>The disconnected holodeck is included in every build. Development builds offer
+prepared operator, pilot, combatant and builder personas on the character screen.
+The pilot starts at a practice helm with money and crew. The combatant has a blade,
+a suit and a practice target. The operator and builder start at staging.
+Each account can take each profile once. Use separate accounts for independent users.
+The extra experienced-pilot profile exercises owned-ship setup.</p>
+<p>The engine gates both profile listing and direct selection with <code>debug_assertions</code>.
+Use <code>./build-web.sh --dev</code> for a development browser worker. The default release
+worker does not offer these profiles, even when a debug native server serves it.
+No exits or gates connect the holodeck to the normal world.
+Use the normal showcase pilot and a fresh newcomer for manual checks of the authored world.
 Browser saves and the native server database are separate.</p>
+<h2 id="system-test-fixtures"><a class="doc-anchor" href="#system-test-fixtures">§</a>System test fixtures</h2>
+<p>Automated tests verify systems, modules and plugins, not authored content.
+They do not promise story completion, encounter win rates or fleet equipment.
+There is no separate authored-content suite.
+RON stays the source of truth. IndexedDB keeps browser state and builder overlays.
+A database migration is not needed for test isolation.</p>
+<p>World-backed tests enable the <code>lh_content</code> <code>test-support</code> feature and call
+<code>lh_content::holodeck::content()</code>. The loader parses only the combined
+<code>holodeck</code> records, caches the immutable content once per process and returns a fresh clone.
+Each harness owns its engine, clock, random seed and store.
+Tests can alter that clone for a specific case.
+Independent start and timing rules live in <code>lh_content/src/holodeck_rules.ron</code>.
+Add only compact exercise props, not copies of authored adventures.
+Geometry tests build synthetic layouts. Name tests use tiny synthetic sample lists.</p>
+<p>The production loader and builder still validate content.
+Tests of validation supply deliberate valid and invalid records.
+They never load the normal world to check it, and never read the real name corpus.</p>
 <h2 id="checks"><a class="doc-anchor" href="#checks">§</a>Checks</h2>
 <p>Run from <code>game/</code>:</p>
 <div class="example-wrap"><pre class="language-sh"><code>cargo test --workspace --locked
@@ -138,8 +202,9 @@ cargo build -p lh_engine -p lh_worker --target wasm32-unknown-unknown --locked
 cargo clippy -p lh_lab --target wasm32-unknown-unknown --locked -- -D warnings
 python3 -m unittest discover -s tools -p &#39;test_*.py&#39; -v
 ./build-docs.sh</code></pre></div>
-<p>The opening’s end-to-end typed-command test is:</p>
-<div class="example-wrap"><pre class="language-sh"><code>cargo test -p lh_engine --test walkthrough --locked</code></pre></div>
+<p>The typed system exercises and template-policy check are:</p>
+<div class="example-wrap"><pre class="language-sh"><code>cargo test -p lh_engine --test walkthrough --locked
+cargo test -p lh_engine --release --test walkthrough template_availability_is_enforced_for_direct_requests --locked</code></pre></div>
 <p>Check interface changes in a browser at 1920x960 and 1600x860.
 Hard-reload after rebuilding browser assets.
 There is no service worker.</p>

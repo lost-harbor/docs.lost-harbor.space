@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["claim","named_items","release"],"struct":["ItemUsePlugin","SavedUse","UsingItem"]};

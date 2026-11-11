@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["allowed_verb","enter","groups","has","leave","pilot","require","verb_name"],"struct":["ControlsPlugin"]};

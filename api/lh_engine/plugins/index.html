@@ -34,20 +34,23 @@ the day, advanced from the host clock.</dd><dt><a class="mod" href="combat/index
 The <code>combat</code> plugin: CircleMUD-style real-time fights with 5e resolution.</dd><dt><a class="mod" href="comms/index.html" title="mod lh_engine::plugins::comms">comms</a></dt><dd>Talking: say, emote, tells, channels, OOC and <code>who</code>.
 Talking: say, emote, socials, tells and replies, station channels, OOC and <code>who</code>.
 Player-authored text is always passed through <code>lh_markup::sanitize_player</code>
-(colours allowed, links stripped).</dd><dt><a class="mod" href="core/index.html" title="mod lh_engine::plugins::core">core</a></dt><dd>Core views every client needs: the UI mode and the action queue.
+(colours allowed, links stripped).</dd><dt><a class="mod" href="controls/index.html" title="mod lh_engine::plugins::controls">controls</a></dt><dd>Configurable item control groups and the shared Control View.
+Item-based controls. Design pattern: Registry.</dd><dt><a class="mod" href="core/index.html" title="mod lh_engine::plugins::core">core</a></dt><dd>Core views every client needs: the UI mode and the action queue.
 Core views every client needs: the UI mode and the action queue.</dd><dt><a class="mod" href="crew/index.html" title="mod lh_engine::plugins::crew">crew</a></dt><dd>Hirelings: hire, list and dismiss crew who take posts aboard a ship.
 The <code>crew</code> plugin. A player hires hirelings from an NPC. Each hireling
 then walks the world as a real entity: it keeps a post aboard a ship,
 follows its employer, or guards someone. It fights by its stance, and a
 crew member who dies is gone for good.</dd><dt><a class="mod" href="factions/index.html" title="mod lh_engine::plugins::factions">factions</a></dt><dd>Faction standings, scanned ships and hostile contacts.
 The <code>factions</code> plugin. It tracks each character’s standing with each
-faction, and which ship contacts the character has scanned.</dd><dt><a class="mod" href="guards/index.html" title="mod lh_engine::plugins::guards">guards</a></dt><dd>Exit guards: content-driven checks that hold a character at an exit.
+faction, and which ship contacts the character has scanned.</dd><dt><a class="mod" href="galaxy/index.html" title="mod lh_engine::plugins::galaxy">galaxy</a></dt><dd>Galaxy topology and read-only remote system charts.
+Authoritative galaxy topology and read-only remote charts.</dd><dt><a class="mod" href="guards/index.html" title="mod lh_engine::plugins::guards">guards</a></dt><dd>Exit guards: content-driven checks that hold a character at an exit.
 The <code>guards</code> plugin. It holds a character at a guarded exit until the
 guard’s conditions hold.</dd><dt><a class="mod" href="help/index.html" title="mod lh_engine::plugins::help">help</a></dt><dd>The <code>help</code> command, which lists commands from the registry.
 The <code>help</code> plugin. It lists the visible commands from the command registry,
 grouped by each command’s group name, or explains one command or group.</dd><dt><a class="mod" href="instances/index.html" title="mod lh_engine::plugins::instances">instances</a></dt><dd>Private per-character copies of instance groups and owned ship rooms.
 The <code>instances</code> plugin. It gives each character a private copy of an
-instance group, and it runs the opening machinery that lives in a copy.</dd><dt><a class="mod" href="items/index.html" title="mod lh_engine::plugins::items">items</a></dt><dd>Things: room items, picking up, dropping, giving, wearing and searching.
+instance group, and it runs the opening machinery that lives in a copy.</dd><dt><a class="mod" href="item_use/index.html" title="mod lh_engine::plugins::item_use">item_<wbr>use</a></dt><dd>Generic per-item occupancy and mounting.
+Shared occupancy and mounting for ordinary items.</dd><dt><a class="mod" href="items/index.html" title="mod lh_engine::plugins::items">items</a></dt><dd>Things: room items, picking up, dropping, giving, wearing and searching.
 Things: room items and fixtures, picking up, dropping, giving, wearing,
 inventory and equipment, prising fixtures open and searching for hidden
 things. Also owns the <code>items</code> section of the character document.</dd><dt><a class="mod" href="jobs/index.html" title="mod lh_engine::plugins::jobs">jobs</a></dt><dd>Jobs from the tally board: accept, deliver and abandon.
@@ -63,7 +66,7 @@ room, travel time for long exits, arrival events, and the local map.</dd><dt><a 
 The <code>names</code> plugin: chains, phrases and new names, for builders.</dd><dt><a class="mod" href="npcs/index.html" title="mod lh_engine::plugins::npcs">npcs</a></dt><dd>Non-player characters: placement in rooms, <code>talk</code> and <code>ask</code>.
 The <code>npcs</code> plugin. It places non-player characters (NPCs) in their rooms,
 shows them in room views, and runs the <code>talk</code> and <code>ask</code> commands.</dd><dt><a class="mod" href="piloting/index.html" title="mod lh_engine::plugins::piloting">piloting</a></dt><dd>Ships as rooms: boarding through airlocks, taking and leaving the helm.
-Ships as places people walk in, and the helm.</dd><dt><a class="mod" href="portraits/index.html" title="mod lh_engine::plugins::portraits">portraits</a></dt><dd>Faces: the <code>portrait</code> command and the one free change after the Works.
+Boarding and dynamic ship airlocks.</dd><dt><a class="mod" href="portraits/index.html" title="mod lh_engine::plugins::portraits">portraits</a></dt><dd>Faces: the <code>portrait</code> command and the one free change after the Works.
 The <code>portraits</code> plugin: the typed commands for a character’s face.</dd><dt><a class="mod" href="shipyard/index.html" title="mod lh_engine::plugins::shipyard">shipyard</a></dt><dd>Shipyards: buying and selling whole ships, and the fleet list.
 Shipyards: buying and selling whole ships, and the fleet list.</dd><dt><a class="mod" href="shops/index.html" title="mod lh_engine::plugins::shops">shops</a></dt><dd>Shops: buying, selling and valuing with a shopkeeper NPC.
 Shops: buying and selling with a shopkeeper NPC in the room.</dd><dt><a class="mod" href="sims/index.html" title="mod lh_engine::plugins::sims">sims</a></dt><dd>Simulated players: they wander, chat, say things and answer tells.
