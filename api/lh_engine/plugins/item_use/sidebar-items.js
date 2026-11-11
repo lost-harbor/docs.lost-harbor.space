@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":["claim","named_items","release"],"struct":["ItemUsePlugin","SavedUse","UsingItem"]};
+window.SIDEBAR_ITEMS = {"fn":["claim","has_capacity","named_items","reference","release"],"struct":["ItemUsePlugin","SavedUse","UsingItem"]};

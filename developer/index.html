@@ -105,7 +105,13 @@ Content files are the source of truth.</p>
 <p>Items independently define <code>mountable</code>, <code>unlisted</code>, and positive <code>user_capacity</code>
 (default 1). <code>fixed</code> prevents pickup. <code>unlisted</code> suppresses room listings and every
 pickup selector, but preserves named interactions and existing discovery rules.
-Mounts and control items cannot stack.</p>
+Mounts and control items cannot stack.
+Control items normally stay listed. Reserve <code>unlisted</code> for deliberate edge cases,
+such as alien ships. The Thren lifeboat helm stays listed.</p>
+<p>Bare <code>pilot</code> chooses the first visible Pilot control with free capacity.
+With several controls, it marks its choice and lists exact named commands.
+Named commands remain strict. Item menus use physical references such as <code>pilot 2.helm</code>.
+Opening a saved room copy restores missing authored fixed controls, not depleted loose loot.</p>
 <p><code>controls: (label: "Sensor Mode", groups: ["navigation", "sensors"])</code> enables the
 Control System feature. Feature plugins register group labels and shortcuts with
 <code>AppBuilder::control_group</code>. <code>content_check</code> adds registry-aware validation to
